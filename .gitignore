@@ -119,3 +119,6 @@ dist
 
 # Idea
 .idea
+
+# Compiled ts
+*.js

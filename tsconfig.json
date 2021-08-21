@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "module": "system",
+    "outFile": "build/output.js"
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "**/*.spec.ts"]
+}

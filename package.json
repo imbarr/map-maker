@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "web-dev-server --app-index src/index.html --open --node-resolve",
+    "start": "web-dev-server --watch --app-index src/index.html --open --node-resolve",
     "format": "prettier --write ."
   },
   "author": "",
