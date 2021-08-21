@@ -1,0 +1,14 @@
+{
+  "name": "map-maker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "web-dev-server --app-index src/index.html --open --node-resolve"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@web/dev-server": "^0.1.21"
+  }
+}
