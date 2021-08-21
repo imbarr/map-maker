@@ -4,11 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "web-dev-server --app-index src/index.html --open --node-resolve"
+    "start": "web-dev-server --app-index src/index.html --open --node-resolve",
+    "format": "prettier --write ."
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "@web/dev-server": "^0.1.21"
+  "devDependencies": {
+    "@web/dev-server": "^0.1.21",
+    "prettier": "2.3.2"
   }
 }
