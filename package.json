@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start:watch": "web-dev-server --watch --app-index src/index.html --open --node-resolve",
-    "babel:watch": "babel src/ --extensions \".ts\" --watch --out-file build/output.js",
+    "start:watch": "web-dev-server --watch --app-index src/index/index.html --open --node-resolve",
+    "babel:watch": "babel src/ --extensions \".ts\" --watch --out-dir build/",
     "format": "prettier --write ."
   },
   "author": "",
@@ -14,7 +14,13 @@
     "@babel/cli": "^7.14.8",
     "@babel/core": "^7.15.0",
     "@babel/preset-typescript": "^7.15.0",
+    "@rollup/plugin-typescript": "^8.2.5",
     "@web/dev-server": "^0.1.21",
     "prettier": "2.3.2"
+  },
+  "dependencies": {
+    "@rollup/plugin-babel": "^5.3.0",
+    "@rollup/plugin-multi-entry": "^4.1.0",
+    "rollup": "^2.56.2"
   }
 }

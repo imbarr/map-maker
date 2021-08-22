@@ -1,16 +1,31 @@
-body {
-    margin: 0
+html, body {
+    margin: 0;
+    height: 100%;
+}
+
+#container {
+    height: 100%;
+    display: grid;
+    grid-template-rows: min-content 1fr;
+}
+
+#menubar {
+    grid-row: 1;
+    background-color: white;
+}
+
+.menubutton {
+    margin: 3px
 }
 
 #workspace {
-    height: 100vh;
-    width: 100vw;
+    grid-row: 2;
     background-color: darkgrey;
     overflow: scroll;
 }
 
 #canvas {
-    background-color: white;
+    background-color: dimgrey;
     position: relative;
 }
 

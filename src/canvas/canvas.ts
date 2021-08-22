@@ -1,25 +1,33 @@
-const zoomStep = 1.1
+import { Item } from "../item/item"
+import { setSize, Size } from '../util'
 
-class Canvas {
+const zoomStep = 1.1
+const initSize = {
+  width: 800,
+  height: 600
+}
+
+export class Canvas {
   html: HTMLElement
-  map: GameMap
+  map: Item
 
   size: Size
   scale: number
   prevX: number
   prevY: number
 
-  constructor(html: HTMLElement, map: GameMap) {
+  constructor(html: HTMLElement) {
     this.html = html
-    this.map = map
 
     this.scale = 1
-    this.size ={
-      width: html.offsetWidth,
-      height: html.offsetHeight
-    }
+    this.size = initSize
 
     this.addEvents()
+  }
+
+  setMap(map: Item, size: Size) {
+    this.map = map
+    this.size = size
   }
 
   zoomIn(event: WheelEvent) {
@@ -28,16 +36,6 @@ class Canvas {
 
   zoomOut(event: WheelEvent) {
     this.zoom(event, scale => scale / zoomStep)
-  }
-
-  setImage(src: string) {
-    this.size = this.map.setImage(src)
-    this.render()
-  }
-
-  addMarker(marker: Marker) {
-    this.map.addMarker(marker)
-    marker.render(this)
   }
 
   private zoom(event: WheelEvent, scaleFunc: (scale: number) => number) {
@@ -81,7 +79,7 @@ class Canvas {
       this.prevY = e.pageY
     })
 
-    this.html.addEventListener('mousemove', e => {
+    this.html.parentElement.addEventListener('mousemove', e => {
       if (e.buttons) {
         e.preventDefault()
         let drag = {
@@ -99,7 +97,7 @@ class Canvas {
     })
 
     // Zoom in/out
-    this.html.addEventListener('wheel', e => {
+    this.html.parentElement.addEventListener('wheel', e => {
       let event = e as WheelEvent
       if (event.ctrlKey) {
         event.preventDefault()
@@ -112,9 +110,11 @@ class Canvas {
     })
   }
 
-  private render() {
+  render() {
     this.html.innerHTML = ''
     setSize(this.html, this.size, this.scale)
-    this.map.render(this)
+    if (this.map) {
+      this.map.render(this)
+    }
   }
 }

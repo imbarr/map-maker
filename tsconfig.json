@@ -1,8 +1,6 @@
 {
   "compilerOptions": {
-    "moduleResolution": "node",
-    "module": "system",
-    "outFile": "build/output.js"
+    "module": "es2015"
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "**/*.spec.ts"]

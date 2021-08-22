@@ -1,4 +1,8 @@
-class GameMap {
+import { Marker } from './marker'
+import { Item } from './item'
+import { Canvas } from '../canvas/canvas'
+
+export class GameMap implements Item {
   image: string
   markers: Marker[]
 
@@ -6,16 +10,8 @@ class GameMap {
     this.markers = []
   }
 
-  setImage(image: string): Size {
+  setImage(image: string) {
     this.image = image
-
-    let elem = this.getElement()
-    let imgElem = elem as HTMLImageElement
-
-    return {
-      width: 2951,
-      height: 2390
-    }
   }
 
   addMarker(marker: Marker) {

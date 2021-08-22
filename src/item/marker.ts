@@ -1,4 +1,8 @@
-class Marker {
+import { Item } from './item'
+import { Canvas } from '../canvas/canvas'
+import { Coords, setCoords } from '../util'
+
+export class Marker implements Item {
   icon: string
   coords: Coords
 
