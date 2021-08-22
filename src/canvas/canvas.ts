@@ -4,8 +4,7 @@ class Canvas {
   html: HTMLElement
   map: GameMap
 
-  height: number
-  width: number
+  size: Size
   scale: number
   prevX: number
   prevY: number
@@ -15,8 +14,10 @@ class Canvas {
     this.map = map
 
     this.scale = 1
-    this.width = html.offsetWidth
-    this.height = html.offsetHeight
+    this.size ={
+      width: html.offsetWidth,
+      height: html.offsetHeight
+    }
 
     this.addEvents()
   }
@@ -30,11 +31,13 @@ class Canvas {
   }
 
   setImage(src: string) {
-    let size = this.map.setImage(src)
-
-    this.width = size.width
-    this.height = size.height
+    this.size = this.map.setImage(src)
     this.render()
+  }
+
+  addMarker(marker: Marker) {
+    this.map.addMarker(marker)
+    marker.render(this)
   }
 
   private zoom(event: WheelEvent, scaleFunc: (scale: number) => number) {
@@ -110,8 +113,8 @@ class Canvas {
   }
 
   private render() {
-    this.html.style.height = this.height * this.scale + 'px'
-    this.html.style.width = this.width * this.scale + 'px'
-    this.map.render()
+    this.html.innerHTML = ''
+    setSize(this.html, this.size, this.scale)
+    this.map.render(this)
   }
 }

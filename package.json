@@ -4,12 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "web-dev-server --watch --app-index src/index.html --open --node-resolve",
+    "start:watch": "web-dev-server --watch --app-index src/index.html --open --node-resolve",
+    "babel:watch": "babel src/ --extensions \".ts\" --watch --out-file build/output.js",
     "format": "prettier --write ."
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@babel/cli": "^7.14.8",
+    "@babel/core": "^7.15.0",
+    "@babel/preset-typescript": "^7.15.0",
     "@web/dev-server": "^0.1.21",
     "prettier": "2.3.2"
   }
