@@ -121,4 +121,4 @@ dist
 .idea
 
 # Compiled ts
-*.js
+src/*.js

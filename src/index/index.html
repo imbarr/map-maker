@@ -5,21 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Map Editor</title>
 
+    <link rel="stylesheet" href="/public/mdb.min.css">
     <link rel="stylesheet" href="index.css">
-    <script src="../../build/multi-entry.js" defer>
-    </script>
+    <script src="../../build/index/index.js" defer></script>
+    <script type="module" src="../../build/event/event-listeners.js" defer></script>
+    <script src="../../build/multi-entry.js" defer></script>
   </head>
   <body>
     <div id="container">
       <div id="menubar">
-        <button class="menubutton" onclick="bundle.onSetImage()">Set image</button>
-        <button class="menubutton">Save</button>
-        <button class="menubutton">Load</button>
+        <button class="btn" id="set-image">Set image</button>
+        <button class="btn">Save</button>
+        <button class="btn">Load</button>
       </div>
       <div id="workspace">
         <div id="canvas">
         </div>
       </div>
     </div>
+
+    <ul id="contextmenu" class="dropdown-menu">
+      <li class="dropdown-item" id="create-icon">Create icon</li>
+      <li class="dropdown-item">First</li>
+      <li class="dropdown-item">Second</li>
+      <li class="dropdown-item">Third</li>
+    </ul>
   </body>
 </html>

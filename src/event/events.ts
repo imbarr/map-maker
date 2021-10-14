@@ -1,5 +1,7 @@
-import { GameMap } from './item/game-map'
-import { getCanvas } from './globals'
+import { GameMap } from '../item/game-map'
+import { getCanvas } from '../globals'
+
+const menu = document.getElementById('contextmenu')
 
 export function onSetImage() {
   let input = document.createElement('input')
@@ -31,4 +33,15 @@ export function onSetImage() {
   }
 
   input.click()
+}
+
+export function openContextMenu(event) {
+  event.preventDefault()
+  menu.style.top = `${event.clientY}px`
+  menu.style.left = `${event.clientX}px`
+  menu.classList.add('visible')
+}
+
+export function closeContextMenu() {
+  menu.classList.remove('visible')
 }
