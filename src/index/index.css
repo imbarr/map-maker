@@ -31,13 +31,18 @@ html, body {
 }
 
 #contextmenu {
-    display: none;
     position: fixed;
     cursor: pointer;
 }
 
-#contextmenu.visible {
+#contextmenu.show {
     display: block;
+    user-select: none;
+}
+
+#modal.show {
+    display: block;
+    background: rgba(0,0,0,0.5);
 }
 
 .background-image {

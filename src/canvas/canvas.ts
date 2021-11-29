@@ -1,5 +1,5 @@
 import { Item } from "../item/item"
-import { setSize, Size } from '../util'
+import { Coords, setSize, Size } from '../util'
 import { GameMap } from '../item/game-map'
 
 const zoomStep = 1.1
@@ -16,6 +16,7 @@ export class Canvas {
   scale: number
   prevX: number
   prevY: number
+  selectedCoords: Coords
 
   constructor(html: HTMLElement) {
     this.html = html
@@ -37,7 +38,15 @@ export class Canvas {
     this.setMap(gameMap, size)
   }
 
-  setMap(map: Item, size: Size) {
+  setSelectedCoords(mouseX: number, mouseY: number) {
+    const rect = this.html.getBoundingClientRect();
+    this.selectedCoords = {
+      x: (mouseX - rect.left) / this.scale,
+      y: (mouseY - rect.top) / this.scale
+    }
+  }
+
+  setMap(map: GameMap, size: Size) {
     this.map = map
     this.size = size
   }

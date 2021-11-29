@@ -23,6 +23,14 @@ export class Canvas {
     this.setMap(gameMap, size);
   }
 
+  setSelectedCoords(mouseX, mouseY) {
+    const rect = this.html.getBoundingClientRect();
+    this.selectedCoords = {
+      x: (mouseX - rect.left) / this.scale,
+      y: (mouseY - rect.top) / this.scale
+    };
+  }
+
   setMap(map, size) {
     this.map = map;
     this.size = size;

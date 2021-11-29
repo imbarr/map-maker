@@ -1,5 +1,13 @@
-import { onSetImage, openContextMenu, closeContextMenu } from './events'
+import * as event from './events'
 
-document.getElementById('set-image').addEventListener('click', onSetImage)
-document.getElementById('canvas').addEventListener('contextmenu', openContextMenu)
-document.getElementById('canvas').addEventListener('click', closeContextMenu)
+document.getElementById('set-image').addEventListener('click', event.onSetImage)
+document.getElementById('canvas').addEventListener('contextmenu', event.openContextMenu)
+document.getElementById('canvas').addEventListener('click', event.closeContextMenu)
+document.getElementById('contextmenu').addEventListener('click', event.closeContextMenu)
+
+document.getElementById('menu-create-icon').addEventListener('click', event.onMenuCreateIcon)
+
+document.getElementById('close-modal').addEventListener('click', event.onCloseModal)
+document.getElementById('modal').addEventListener('click', event.onCloseModal)
+document.getElementById('modal-content').addEventListener('click', event.stopPropagation)
+document.getElementById('create-icon').addEventListener('click', event.onCreateIcon)
