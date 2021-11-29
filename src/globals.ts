@@ -2,6 +2,8 @@ import {Canvas} from './canvas/canvas'
 
 let canvas: Canvas
 
+export const markerSize = 20
+
 export function getCanvas(): Canvas {
   if (canvas) {
     return canvas

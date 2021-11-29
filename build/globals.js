@@ -1,5 +1,6 @@
 import { Canvas } from './canvas/canvas';
 let canvas;
+export const markerSize = 20;
 export function getCanvas() {
   if (canvas) {
     return canvas;

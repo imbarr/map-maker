@@ -1,5 +1,6 @@
 import { Item } from "../item/item"
 import { setSize, Size } from '../util'
+import { GameMap } from '../item/game-map'
 
 const zoomStep = 1.1
 const initSize = {
@@ -9,7 +10,7 @@ const initSize = {
 
 export class Canvas {
   html: HTMLElement
-  map: Item
+  map: GameMap
 
   size: Size
   scale: number
@@ -23,6 +24,17 @@ export class Canvas {
     this.size = initSize
 
     this.addEvents()
+  }
+
+  setImage(img: HTMLImageElement) {
+    let gameMap = new GameMap()
+    gameMap.setImage(img.src)
+    let size = {
+      width: img.naturalWidth,
+      height: img.naturalHeight
+    }
+
+    this.setMap(gameMap, size)
   }
 
   setMap(map: Item, size: Size) {

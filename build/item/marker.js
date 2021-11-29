@@ -1,4 +1,5 @@
 import { setCoords } from '../util';
+import { markerSize } from '../globals';
 export class Marker {
   constructor(icon, coords) {
     this.icon = icon;
@@ -15,6 +16,8 @@ export class Marker {
     let template = document.createElement('template');
     template.innerHTML = `<img class="marker"
                                src="${this.icon}"
+                               width="${markerSize}px"
+                               height="${markerSize}px"
                                alt="not found"/>`;
     return template.content.firstChild;
   }

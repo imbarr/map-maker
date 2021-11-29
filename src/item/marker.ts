@@ -1,6 +1,7 @@
 import { Item } from './item'
 import { Canvas } from '../canvas/canvas'
 import { Coords, setCoords } from '../util'
+import { markerSize } from '../globals'
 
 export class Marker implements Item {
   icon: string
@@ -21,6 +22,8 @@ export class Marker implements Item {
     let template = document.createElement('template')
     template.innerHTML = `<img class="marker"
                                src="${this.icon}"
+                               width="${markerSize}px"
+                               height="${markerSize}px"
                                alt="not found"/>`
     return template.content.firstChild as HTMLElement
   }

@@ -1,4 +1,5 @@
 import { setSize } from '../util';
+import { GameMap } from '../item/game-map';
 const zoomStep = 1.1;
 const initSize = {
   width: 800,
@@ -10,6 +11,16 @@ export class Canvas {
     this.scale = 1;
     this.size = initSize;
     this.addEvents();
+  }
+
+  setImage(img) {
+    let gameMap = new GameMap();
+    gameMap.setImage(img.src);
+    let size = {
+      width: img.naturalWidth,
+      height: img.naturalHeight
+    };
+    this.setMap(gameMap, size);
   }
 
   setMap(map, size) {

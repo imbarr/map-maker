@@ -1,4 +1,3 @@
-import { GameMap } from '../item/game-map';
 import { getCanvas } from '../globals';
 const menu = document.getElementById('contextmenu');
 export function onSetImage() {
@@ -11,14 +10,8 @@ export function onSetImage() {
     let img = new Image();
 
     img.onload = () => {
-      let gameMap = new GameMap();
-      gameMap.setImage(img.src);
-      let size = {
-        width: img.naturalWidth,
-        height: img.naturalHeight
-      };
       let canvas = getCanvas();
-      canvas.setMap(gameMap, size);
+      canvas.setImage(img);
       canvas.render();
     };
 
