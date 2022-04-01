@@ -45,6 +45,12 @@ html, body {
     background: rgba(0,0,0,0.5);
 }
 
+#modal .modal-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 5px;
+}
+
 .background-image {
     display: block;
     height: 100%;
@@ -56,4 +62,18 @@ html, body {
     height: 20px;
     width: 20px;
     transform: translate(-50%, -50%);
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    cursor: pointer;
+}
+
+.dropdown-menu.show {
+    display: block;
 }

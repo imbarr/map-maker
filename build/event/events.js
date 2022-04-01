@@ -1,5 +1,6 @@
 import { getCanvas } from '../globals';
 import { Marker } from '../item/marker';
+import { PopulateIconList } from '../icons';
 const menu = document.getElementById('contextmenu');
 const modal = document.getElementById('modal');
 export function onSetImage() {
@@ -48,8 +49,18 @@ export function stopPropagation(event) {
 }
 export function onCreateIcon() {
   const canvas = getCanvas();
-  const marker = new Marker('/public/message.svg', canvas.selectedCoords);
+  const marker = new Marker(canvas.context.iconSelected, canvas.selectedCoords);
   canvas.map.addMarker(marker);
   canvas.render();
   modal.classList.remove('show');
+}
+export function onSelectIcon(event) {
+  let list = document.getElementById('select-icon-list');
+
+  if (list.classList.contains('show')) {
+    list.classList.remove('show');
+  } else {
+    PopulateIconList(list);
+    list.classList.add('show');
+  }
 }
