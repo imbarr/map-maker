@@ -1,4 +1,3 @@
-import { getCanvas } from './globals';
 export const IconsList = {
   'enemy': {
     name: 'Enemy',
@@ -17,8 +16,8 @@ export function PopulateIconList(list) {
     elem.classList.add('dropdown-item');
     elem.addEventListener('click', () => {
       document.getElementById('select-icon').innerText = IconsList[key].name;
+      document.getElementById('select-icon-input').setAttribute('value', key);
       list.classList.remove('show');
-      getCanvas().context.iconSelected = key;
     });
     elem.innerHTML = IconsList[key].name;
     list.appendChild(elem);

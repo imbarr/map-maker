@@ -64,8 +64,28 @@ html, body {
     transform: translate(-50%, -50%);
 }
 
+.marker-tooltip {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 5px;
+    position: absolute;
+    top: -5px;
+    left: 105%;
+}
+
+.marker:hover .marker-tooltip {
+    visibility: visible;
+}
+
 .dropdown {
     position: relative;
+}
+
+.dropdown input {
+    display: none;
 }
 
 .dropdown-menu {

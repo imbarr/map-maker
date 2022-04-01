@@ -6,10 +6,12 @@ import { IconsList } from '../icons'
 
 export class Marker implements Item {
   icon: string
+  text: string
   coords: Coords
 
-  constructor(icon: string, coords: Coords) {
+  constructor(icon: string, text:string, coords: Coords) {
     this.icon = icon
+    this.text = text
     this.coords = coords
   }
 
@@ -23,11 +25,13 @@ export class Marker implements Item {
     let file = '/public/icons/' + IconsList[this.icon].file
 
     let template = document.createElement('template')
-    template.innerHTML = `<img class="marker"
-                               src="${file}"
-                               width="${markerSize}px"
-                               height="${markerSize}px"
-                               alt="not found"/>`
+    template.innerHTML = `<div class="marker">
+                            <img src="${file}"
+                                 width="${markerSize}px"
+                                 height="${markerSize}px"
+                                 alt="not found"/>
+                            <span class="marker-tooltip">${this.text}</span>     
+                          </div>`
     return template.content.firstChild as HTMLElement
   }
 }

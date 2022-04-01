@@ -19,8 +19,8 @@ export function PopulateIconList(list: HTMLElement) {
     elem.classList.add('dropdown-item')
     elem.addEventListener('click', () => {
       document.getElementById('select-icon').innerText = IconsList[key].name
+      document.getElementById('select-icon-input').setAttribute('value', key)
       list.classList.remove('show')
-      getCanvas().context.iconSelected = key
     })
     elem.innerHTML = IconsList[key].name
     list.appendChild(elem)

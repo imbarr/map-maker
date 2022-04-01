@@ -1,6 +1,5 @@
 import { Coords, setSize, Size } from '../util'
 import { GameMap } from '../item/game-map'
-import { Context } from './context'
 
 const zoomStep = 1.1
 const initSize = {
@@ -11,7 +10,6 @@ const initSize = {
 export class Canvas {
   html: HTMLElement
   map: GameMap
-  context: Context
 
   size: Size
   scale: number
@@ -21,7 +19,6 @@ export class Canvas {
 
   constructor(html: HTMLElement) {
     this.html = html
-    this.context = new Context()
 
     this.scale = 1
     this.size = initSize

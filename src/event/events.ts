@@ -1,6 +1,6 @@
 import { getCanvas } from '../globals'
 import { Marker } from '../item/marker'
-import { PopulateIconList } from '../icons'
+import { IconsList, PopulateIconList } from '../icons'
 
 const menu = document.getElementById('contextmenu')
 const modal = document.getElementById('modal')
@@ -58,7 +58,10 @@ export function stopPropagation(event) {
 
 export function onCreateIcon() {
   const canvas = getCanvas()
-  const marker = new Marker(canvas.context.iconSelected, canvas.selectedCoords)
+  let icon = document.getElementById('select-icon-input').value
+  let text = document.getElementById('text-input').value
+
+  const marker = new Marker(icon, text, canvas.selectedCoords)
   canvas.map.addMarker(marker)
   canvas.render()
   modal.classList.remove('show')

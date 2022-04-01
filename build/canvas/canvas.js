@@ -1,6 +1,5 @@
 import { setSize } from '../util';
 import { GameMap } from '../item/game-map';
-import { Context } from './context';
 const zoomStep = 1.1;
 const initSize = {
   width: 800,
@@ -9,7 +8,6 @@ const initSize = {
 export class Canvas {
   constructor(html) {
     this.html = html;
-    this.context = new Context();
     this.scale = 1;
     this.size = initSize;
     this.addEvents();
