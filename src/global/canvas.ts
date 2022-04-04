@@ -66,14 +66,19 @@ export class Canvas {
   }
 
   private zoom(event: WheelEvent, scaleFunc: (scale: number) => number) {
+    let offset = {
+      x: this.html.parentElement.offsetLeft,
+      y: this.html.parentElement.offsetTop
+    }
+
     let original = {
       x: this.html.parentElement.scrollLeft,
       y: this.html.parentElement.scrollTop
     }
 
     let location = {
-      x: event.pageX + original.x,
-      y: event.pageY + original.y
+      x: event.pageX - offset.x + original.x,
+      y: event.pageY  - offset.y + original.y
     }
 
     let zoomPoint = {
@@ -89,8 +94,8 @@ export class Canvas {
     }
 
     let scrollNew = {
-      x: zoomPointNew.x - event.pageX,
-      y: zoomPointNew.y - event.pageY
+      x: zoomPointNew.x - event.pageX + offset.x,
+      y: zoomPointNew.y - event.pageY + offset.y
     }
 
     this.html.parentElement.scrollLeft = scrollNew.x
