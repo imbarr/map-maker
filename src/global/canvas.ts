@@ -1,5 +1,7 @@
 import { Coords, setSize, Size } from '../util'
-import { GameMap } from '../item/game-map'
+import { MapItem } from '../item/map-item'
+import { global } from './global'
+import { MarkerItem } from '../item/marker-item'
 
 const zoomStep = 1.1
 const initSize = {
@@ -9,7 +11,7 @@ const initSize = {
 
 export class Canvas {
   html: HTMLElement
-  map: GameMap
+  map: MapItem
 
   size: Size
   scale: number
@@ -26,15 +28,20 @@ export class Canvas {
     this.addEvents()
   }
 
-  setImage(img: HTMLImageElement) {
-    let gameMap = new GameMap()
-    gameMap.setImage(img.src)
+  loadMap() {
+    let mapItem = new MapItem()
+    global.state.filteredMarkers.forEach(m => mapItem.addMarker(new MarkerItem(m)))
+
+    let img = global.map.image
+
+    mapItem.setImage(img.src)
     let size = {
       width: img.naturalWidth,
       height: img.naturalHeight
     }
 
-    this.setMap(gameMap, size)
+    this.setMap(mapItem, size)
+    this.render()
   }
 
   setSelectedCoords(mouseX: number, mouseY: number) {
@@ -45,7 +52,7 @@ export class Canvas {
     }
   }
 
-  setMap(map: GameMap, size: Size) {
+  setMap(map: MapItem, size: Size) {
     this.map = map
     this.size = size
   }

@@ -1,15 +1,20 @@
-import { getCanvas } from '../globals';
-import { Marker } from '../item/marker';
-let canvas = getCanvas();
+import { Map } from '../global/map/map';
+import { global } from '../global/global';
 let img = new Image();
 img.src = '/public/stardew.jpeg';
-canvas.setImage(img);
-canvas.map.addMarker(new Marker('message', 'I am message', {
-  x: 100,
-  y: 100
-}));
-canvas.map.addMarker(new Marker('enemy', 'I am enemy', {
-  x: 200,
-  y: 300
-}));
-canvas.render();
+let map = new Map(img, [{
+  icon: 'message',
+  text: 'I am message',
+  coords: {
+    x: 100,
+    y: 100
+  }
+}, {
+  icon: 'enemy',
+  text: 'I am enemy',
+  coords: {
+    x: 200,
+    y: 300
+  }
+}]);
+global.setMap(map);

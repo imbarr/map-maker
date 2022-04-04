@@ -1,6 +1,8 @@
-import { getCanvas } from '../globals';
-import { Marker } from '../item/marker';
+import { global } from '../global/global';
 import { PopulateIconList } from '../icons';
+import { search, searchCurrentValue } from '../interface/search';
+import { Map } from '../global/map/map';
+import { Marker } from '../global/map/marker';
 const menu = document.getElementById('contextmenu');
 const modal = document.getElementById('modal');
 export function onSetImage() {
@@ -13,9 +15,7 @@ export function onSetImage() {
     let img = new Image();
 
     img.onload = () => {
-      let canvas = getCanvas();
-      canvas.setImage(img);
-      canvas.render();
+      global.setMap(new Map(img, []));
     };
 
     img.onerror = () => {
@@ -29,8 +29,7 @@ export function onSetImage() {
 }
 export function openContextMenu(event) {
   event.preventDefault();
-  const canvas = getCanvas();
-  canvas.setSelectedCoords(event.pageX, event.pageY);
+  global.canvas.setSelectedCoords(event.pageX, event.pageY);
   menu.style.top = `${event.clientY}px`;
   menu.style.left = `${event.clientX}px`;
   menu.classList.add('show');
@@ -48,15 +47,15 @@ export function stopPropagation(event) {
   event.stopPropagation();
 }
 export function onCreateIcon() {
-  const canvas = getCanvas();
   let icon = document.getElementById('select-icon-input').value;
   let text = document.getElementById('text-input').value;
-  const marker = new Marker(icon, text, canvas.selectedCoords);
-  canvas.map.addMarker(marker);
-  canvas.render();
+  const marker = new Marker(icon, text, global.canvas.selectedCoords);
+  global.map.markers.push(marker);
+  searchCurrentValue();
+  global.canvas.loadMap();
   modal.classList.remove('show');
 }
-export function onSelectIcon(event) {
+export function onSelectIcon() {
   let list = document.getElementById('select-icon-list');
 
   if (list.classList.contains('show')) {
@@ -65,4 +64,8 @@ export function onSelectIcon(event) {
     PopulateIconList(list);
     list.classList.add('show');
   }
+}
+export function onSearch() {
+  search(this.value);
+  global.canvas.loadMap();
 }

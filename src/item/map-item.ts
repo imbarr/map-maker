@@ -1,10 +1,10 @@
-import { Marker } from './marker'
+import { MarkerItem } from './marker-item'
 import { Item } from './item'
 import { Canvas } from '../canvas/canvas'
 
-export class GameMap implements Item {
+export class MapItem implements Item {
   image: string
-  markers: Marker[]
+  markers: MarkerItem[]
 
   constructor() {
     this.markers = []
@@ -14,7 +14,7 @@ export class GameMap implements Item {
     this.image = image
   }
 
-  addMarker(marker: Marker) {
+  addMarker(marker: MarkerItem) {
     this.markers.push(marker)
   }
 

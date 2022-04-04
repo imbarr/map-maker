@@ -3,16 +3,17 @@ import { Canvas } from '../canvas/canvas'
 import { Coords, setCoords } from '../util'
 import { markerSize } from '../globals'
 import { IconsList } from '../icons'
+import { Marker } from '../map/marker'
 
-export class Marker implements Item {
+export class MarkerItem implements Item {
   icon: string
   text: string
   coords: Coords
 
-  constructor(icon: string, text:string, coords: Coords) {
-    this.icon = icon
-    this.text = text
-    this.coords = coords
+  constructor(m: Marker) {
+    this.icon = m.icon
+    this.text = m.text
+    this.coords = m.coords
   }
 
   render(canvas: Canvas) {

@@ -1,6 +1,6 @@
 import { setSize } from '../util';
 import { MapItem } from '../item/map-item';
-import { getMap } from '../globals';
+import { global } from './global';
 import { MarkerItem } from '../item/marker-item';
 const zoomStep = 1.1;
 const initSize = {
@@ -16,10 +16,9 @@ export class Canvas {
   }
 
   loadMap() {
-    let map = getMap();
     let mapItem = new MapItem();
-    map.filteredMarkers.forEach(m => mapItem.addMarker(new MarkerItem(m)));
-    let img = map.image;
+    global.state.filteredMarkers.forEach(m => mapItem.addMarker(new MarkerItem(m)));
+    let img = global.map.image;
     mapItem.setImage(img.src);
     let size = {
       width: img.naturalWidth,
