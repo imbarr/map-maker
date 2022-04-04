@@ -1,4 +1,4 @@
-import { Coords } from '../util'
+import { Coords } from '../../util'
 
 export class Marker {
   icon: string
