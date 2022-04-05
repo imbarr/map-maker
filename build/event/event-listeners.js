@@ -6,8 +6,9 @@ document.getElementById('contextmenu').addEventListener('click', event.closeCont
 document.getElementById('menu-create-icon').addEventListener('click', event.onMenuCreateIcon);
 document.getElementById('close-modal').addEventListener('click', event.onCloseModal);
 document.getElementById('modal').addEventListener('click', event.onCloseModal);
-document.getElementById('modal-content').addEventListener('click', event.stopPropagation);
+document.getElementById('modal-content').addEventListener('click', event.onModalClick);
 document.getElementById('select-icon').addEventListener('click', event.onSelectIcon);
 document.getElementById('create-icon').addEventListener('click', event.onCreateIcon);
-document.getElementById('search-field').addEventListener('input', event.onSearch);
 document.getElementById('add-icon').addEventListener('click', event.onAddIcon);
+document.getElementById('text-input').addEventListener('input', event.onTextInputChange);
+document.getElementById('search-field').addEventListener('input', event.onSearch);

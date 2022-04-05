@@ -2,7 +2,8 @@ import { global } from '../global/global';
 import { search, searchCurrentValue } from '../interface/search';
 import { Map } from '../global/map/map';
 import { Marker } from '../global/map/marker';
-import { populateIconList } from '../interface/create-marker';
+import { populateIconList, onInputChange, onModalClose } from '../interface/create-marker'; // @ts-ignore
+
 import { v4 as uuid } from 'uuid';
 const menu = document.getElementById('contextmenu');
 const modal = document.getElementById('modal');
@@ -43,8 +44,10 @@ export function onMenuCreateIcon() {
 }
 export function onCloseModal() {
   modal.classList.remove('show');
+  onModalClose();
 }
-export function stopPropagation(event) {
+export function onModalClick(event) {
+  document.getElementById('select-icon-list').classList.remove('show');
   event.stopPropagation();
 }
 export function onCreateIcon() {
@@ -54,8 +57,10 @@ export function onCreateIcon() {
   searchCurrentValue();
   global.canvas.loadMap();
   modal.classList.remove('show');
+  onModalClose();
 }
-export function onSelectIcon() {
+export function onSelectIcon(event) {
+  event.stopPropagation();
   let list = document.getElementById('select-icon-list');
 
   if (list.classList.contains('show')) {
@@ -93,4 +98,7 @@ export function onAddIcon() {
   };
 
   input.click();
+}
+export function onTextInputChange() {
+  onInputChange();
 }

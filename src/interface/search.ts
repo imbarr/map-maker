@@ -1,5 +1,6 @@
 import { global } from '../global/global'
 import { Marker } from '../global/map/marker'
+import { markerSize } from '../global/constants/other'
 
 export function search(value: string) {
   let list = document.getElementById('search-list')
@@ -9,7 +10,13 @@ export function search(value: string) {
   list.innerHTML = ''
   filtered.forEach(el => {
     let elem = document.createElement('li')
-    elem.innerHTML = el.text
+    let text = el.text.replace('\n', `<br>`)
+    let icon = global.state.icons.find(i => i.id === el.icon)
+    elem.innerHTML = `<img src="${icon.image.src}"
+                           width="${markerSize}px"
+                           height="${markerSize}px"
+                           alt="not found"/>
+                      <span>${text}</span>`
     elem.addEventListener('click', () => bleep(el))
     list.appendChild(elem)
   })

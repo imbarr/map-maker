@@ -64,6 +64,7 @@ html, body {
     list-style-type: none;
     cursor: pointer;
     margin-bottom: 5px;
+    border-bottom: 1px solid black;
 }
 
 #modal.show {
@@ -83,6 +84,7 @@ html, body {
 
 #text-input {
     grid-column-start: span 2;
+    height: 100px;
 }
 
 .background-image {
@@ -92,16 +94,28 @@ html, body {
 }
 
 .marker {
+    line-height: 0;
     position: absolute;
     height: 20px;
     width: 20px;
     transform: translate(-50%, -50%);
 }
 
+#select-icon {
+    width: 150px;
+}
+
+#select-icon-list {
+    min-width: 0;
+    width: 150px;
+}
+
 .marker-tooltip {
+    line-height: normal;
     visibility: hidden;
     width: 120px;
     background-color: black;
+    border-radius: .5rem;
     color: white;
     text-align: center;
     padding: 5px;

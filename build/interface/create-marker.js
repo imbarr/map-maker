@@ -10,10 +10,25 @@ export function populateIconList(list) {
       selectIcon.innerHTML = iconImage(icon);
       global.state.createIconSelected = icon;
       list.classList.remove('show');
+      onInputChange();
     });
     elem.innerHTML = iconImage(icon);
     list.appendChild(elem);
   });
+}
+export function onInputChange() {
+  let textarea = document.getElementById('text-input');
+  let button = document.getElementById('create-icon');
+  let selectedIcon = global.state.createIconSelected;
+  button.disabled = !(textarea.value && selectedIcon);
+}
+export function onModalClose() {
+  let textarea = document.getElementById('text-input');
+  let selectIcon = document.getElementById('select-icon');
+  textarea.value = '';
+  selectIcon.innerHTML = 'Select Icon';
+  global.state.createIconSelected = undefined;
+  onInputChange();
 }
 
 function iconImage(icon) {
