@@ -1,9 +1,9 @@
 import { Item } from './item'
-import { Canvas } from '../canvas/canvas'
 import { Coords, setCoords } from '../util'
-import { markerSize } from '../globals'
-import { IconsList } from '../icons'
-import { Marker } from '../map/marker'
+import { Marker } from '../global/map/marker'
+import { Canvas } from '../global/canvas'
+import { markerSize } from '../global/constants/other'
+import { global } from '../global/global'
 
 export class MarkerItem implements Item {
   icon: string
@@ -23,11 +23,12 @@ export class MarkerItem implements Item {
   }
 
   private getElement(): HTMLElement {
-    let file = '/public/icons/' + IconsList[this.icon].file
+    let image = global.state.icons
+      .find(i => i.id === this.icon).image
 
     let template = document.createElement('template')
     template.innerHTML = `<div class="marker">
-                            <img src="${file}"
+                            <img src="${image.src}"
                                  width="${markerSize}px"
                                  height="${markerSize}px"
                                  alt="not found"/>

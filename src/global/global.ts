@@ -8,8 +8,6 @@ class Global {
   state: State
   map: Map
 
-  markerSize = 20
-
   constructor() {
     let html = document.getElementById('canvas')
     this.canvas = new Canvas(html)

@@ -73,8 +73,16 @@ html, body {
 
 #modal .modal-body {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 40px;
     grid-gap: 5px;
+}
+
+#add-icon {
+    padding: 10px;
+}
+
+#text-input {
+    grid-column-start: span 2;
 }
 
 .background-image {
@@ -108,10 +116,6 @@ html, body {
 
 .dropdown {
     position: relative;
-}
-
-.dropdown input {
-    display: none;
 }
 
 .dropdown-menu {

@@ -10,3 +10,4 @@ document.getElementById('modal-content').addEventListener('click', event.stopPro
 document.getElementById('select-icon').addEventListener('click', event.onSelectIcon);
 document.getElementById('create-icon').addEventListener('click', event.onCreateIcon);
 document.getElementById('search-field').addEventListener('input', event.onSearch);
+document.getElementById('add-icon').addEventListener('click', event.onAddIcon);

@@ -14,3 +14,4 @@ document.getElementById('select-icon').addEventListener('click', event.onSelectI
 document.getElementById('create-icon').addEventListener('click', event.onCreateIcon)
 
 document.getElementById('search-field').addEventListener('input', event.onSearch)
+document.getElementById('add-icon').addEventListener('click', event.onAddIcon)

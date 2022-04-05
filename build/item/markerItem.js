@@ -1,6 +1,7 @@
 import { setCoords } from '../util';
 import { markerSize } from '../globals';
 import { IconsList } from '../icons';
+
 export class Marker {
   constructor(icon, text, coords) {
     this.icon = icon;

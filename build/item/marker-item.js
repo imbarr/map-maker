@@ -1,6 +1,6 @@
 import { setCoords } from '../util';
-import { markerSize } from '../globals';
-import { IconsList } from '../icons';
+import { markerSize } from '../global/constants/other';
+import { global } from '../global/global';
 export class MarkerItem {
   constructor(m) {
     this.icon = m.icon;
@@ -15,10 +15,10 @@ export class MarkerItem {
   }
 
   getElement() {
-    let file = '/public/icons/' + IconsList[this.icon].file;
+    let image = global.state.icons.find(i => i.id === this.icon).image;
     let template = document.createElement('template');
     template.innerHTML = `<div class="marker">
-                            <img src="${file}"
+                            <img src="${image.src}"
                                  width="${markerSize}px"
                                  height="${markerSize}px"
                                  alt="not found"/>

@@ -3,8 +3,6 @@ import { State } from './state';
 import { search } from '../interface/search';
 
 class Global {
-  markerSize = 20;
-
   constructor() {
     let html = document.getElementById('canvas');
     this.canvas = new Canvas(html);
