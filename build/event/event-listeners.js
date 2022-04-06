@@ -12,3 +12,5 @@ document.getElementById('create-icon').addEventListener('click', event.onCreateI
 document.getElementById('add-icon').addEventListener('click', event.onAddIcon);
 document.getElementById('text-input').addEventListener('input', event.onTextInputChange);
 document.getElementById('search-field').addEventListener('input', event.onSearch);
+document.getElementById('tag-search-field').addEventListener('input', event.onTagSearch);
+document.getElementById('tag-select-all').addEventListener('input', event.onTagSelectAll);

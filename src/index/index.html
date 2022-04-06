@@ -24,6 +24,13 @@
         </div>
         <ul id="search-list"></ul>
       </div>
+      <div id="tag-search">
+        <div class="form-outline">
+          <input type="checkbox" id="tag-select-all">
+          <input type="text" id="tag-search-field" placeholder="Search tags"/>
+        </div>
+        <ul id="tag-search-list"></ul>
+      </div>
       <div id="workspace">
         <div id="canvas">
         </div>
@@ -54,8 +61,10 @@
             <button type="button" id="add-icon" class="btn btn-primary">
               <img src="/public/add.svg" width="20px" height="20px" alt="not found">
             </button>
-            <label class="form-label" for="text-input">Name</label>
+            <label class="form-label" for="text-input">Text</label>
             <textarea id="text-input"></textarea>
+            <label class="form-label" for="tag-input">Tags</label>
+            <textarea id="tag-input"></textarea>
           </div>
           <div class="modal-footer">
             <button type="button" id="create-icon" class="btn btn-primary" disabled>Create</button>

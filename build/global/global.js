@@ -1,6 +1,6 @@
 import { Canvas } from './canvas';
 import { State } from './state';
-import { search } from '../interface/search';
+import { onMarkersEdited } from '../interface/common';
 
 class Global {
   constructor() {
@@ -11,7 +11,10 @@ class Global {
 
   setMap(map) {
     this.map = map;
-    search('');
+    global.state.tags = [];
+    global.state.selectedTags = [];
+    map.markers.forEach(m => global.state.addNewTags(m.tags));
+    onMarkersEdited();
     this.canvas.loadMap();
   }
 

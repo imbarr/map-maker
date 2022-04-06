@@ -5,6 +5,8 @@ import { Marker } from '../global/map/marker'
 import { populateIconList, onInputChange, onModalClose } from '../interface/create-marker'
 // @ts-ignore
 import { v4 as uuid } from 'uuid';
+import { onMarkersEdited } from '../interface/common'
+import { onCheckAll, tagSearch } from '../interface/tag'
 
 const menu = document.getElementById('contextmenu')
 const modal = document.getElementById('modal')
@@ -61,13 +63,21 @@ export function onModalClick(event) {
 
 export function onCreateIcon() {
   let text = (document.getElementById('text-input') as HTMLInputElement).value
+  let tagInput = document.getElementById('tag-input') as HTMLInputElement
+  let tags = tagInput.value.split('\n')
+  global.state.addNewTags(tags)
 
-  const marker = new Marker(global.state.createIconSelected.id, text, global.canvas.selectedCoords)
+  const marker = {
+    icon: global.state.createIconSelected.id,
+    text: text,
+    coords: global.canvas.selectedCoords,
+    tags: tags
+  }
   global.map.markers.push(marker)
-  searchCurrentValue()
   global.canvas.loadMap()
   modal.classList.remove('show')
   onModalClose()
+  onMarkersEdited()
 }
 
 export function onSelectIcon(event) {
@@ -84,6 +94,14 @@ export function onSelectIcon(event) {
 export function onSearch() {
   search(this.value)
   global.canvas.loadMap()
+}
+
+export function onTagSearch() {
+  tagSearch(this.value)
+}
+
+export function onTagSelectAll() {
+  onCheckAll()
 }
 
 export function onAddIcon() {

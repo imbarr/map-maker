@@ -6,7 +6,7 @@ html, body {
 #container {
     height: 100%;
     display: grid;
-    grid-template-rows: min-content 1fr;
+    grid-template-rows: min-content 1fr 1fr;
     grid-template-columns: 200px 1fr;
 }
 
@@ -22,12 +22,18 @@ html, body {
     grid-column: 1;
 }
 
+#tag-search {
+    grid-row: 3;
+    grid-column: 1;
+}
+
 .menubutton {
     margin: 3px
 }
 
 #workspace {
-    grid-row: 2;
+    grid-column: 2;
+    grid-row-start: span 2;
     position: relative;
     background-color: darkgrey;
     overflow: scroll;
@@ -63,8 +69,32 @@ html, body {
 #search-list li {
     list-style-type: none;
     cursor: pointer;
+    overflow-wrap: break-word;
     margin-bottom: 5px;
     border-bottom: 1px solid black;
+}
+
+#tag-search {
+    padding: 5px;
+    border-top: 3px solid black;
+}
+
+#tag-search-list {
+    padding: 0;
+    margin-top: 5px;
+}
+
+#tag-search-list li {
+    list-style-type: none;
+    cursor: pointer;
+    overflow-wrap: break-word;
+    margin-bottom: 5px;
+}
+
+#tag-search-field {
+    width: 172px;
+    border: 1px solid grey;
+    border-radius: .25rem;
 }
 
 #modal.show {
@@ -83,6 +113,11 @@ html, body {
 }
 
 #text-input {
+    grid-column-start: span 2;
+    height: 100px;
+}
+
+#tag-input {
     grid-column-start: span 2;
     height: 100px;
 }

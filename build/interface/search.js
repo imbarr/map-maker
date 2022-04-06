@@ -2,7 +2,8 @@ import { global } from '../global/global';
 import { markerSize } from '../global/constants/other';
 export function search(value) {
   let list = document.getElementById('search-list');
-  let filtered = global.map.markers.filter(m => m.text.includes(value));
+  let selectedTags = global.state.selectedTags;
+  let filtered = global.map.markers.filter(m => m.text.includes(value) && (selectedTags.length === 0 || selectedTags.filter(t => m.tags.includes(t)).length !== 0));
   global.state.filteredMarkers = filtered;
   list.innerHTML = '';
   filtered.forEach(el => {
@@ -21,6 +22,7 @@ export function search(value) {
 export function searchCurrentValue() {
   let value = document.getElementById('search-field').value;
   search(value);
+  global.canvas.loadMap();
 }
 
 function bleep(marker) {

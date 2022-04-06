@@ -1,10 +1,11 @@
 import { global } from '../global/global';
-import { search, searchCurrentValue } from '../interface/search';
+import { search } from '../interface/search';
 import { Map } from '../global/map/map';
-import { Marker } from '../global/map/marker';
 import { populateIconList, onInputChange, onModalClose } from '../interface/create-marker'; // @ts-ignore
 
 import { v4 as uuid } from 'uuid';
+import { onMarkersEdited } from '../interface/common';
+import { onCheckAll, tagSearch } from '../interface/tag';
 const menu = document.getElementById('contextmenu');
 const modal = document.getElementById('modal');
 export function onSetImage() {
@@ -52,12 +53,20 @@ export function onModalClick(event) {
 }
 export function onCreateIcon() {
   let text = document.getElementById('text-input').value;
-  const marker = new Marker(global.state.createIconSelected.id, text, global.canvas.selectedCoords);
+  let tagInput = document.getElementById('tag-input');
+  let tags = tagInput.value.split('\n');
+  global.state.addNewTags(tags);
+  const marker = {
+    icon: global.state.createIconSelected.id,
+    text: text,
+    coords: global.canvas.selectedCoords,
+    tags: tags
+  };
   global.map.markers.push(marker);
-  searchCurrentValue();
   global.canvas.loadMap();
   modal.classList.remove('show');
   onModalClose();
+  onMarkersEdited();
 }
 export function onSelectIcon(event) {
   event.stopPropagation();
@@ -73,6 +82,12 @@ export function onSelectIcon(event) {
 export function onSearch() {
   search(this.value);
   global.canvas.loadMap();
+}
+export function onTagSearch() {
+  tagSearch(this.value);
+}
+export function onTagSelectAll() {
+  onCheckAll();
 }
 export function onAddIcon() {
   let input = document.createElement('input');
