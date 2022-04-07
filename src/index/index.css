@@ -3,6 +3,14 @@ html, body {
     height: 100%;
 }
 
+.hide {
+    display: none;
+}
+
+.dropdown-item:hover {
+    border-radius: .25rem;
+}
+
 #container {
     height: 100%;
     display: grid;

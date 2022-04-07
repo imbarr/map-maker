@@ -1,6 +1,65 @@
 import { global } from '../global/global'
 import { markerSize } from '../global/constants/other'
 import { Icon } from '../global/icon'
+import { Marker } from '../global/map/marker'
+
+export function prepareEdit() {
+  let title = document.getElementById('modal-title')
+  let createButton = document.getElementById('create-icon')
+  let textInput = document.getElementById('text-input') as HTMLInputElement
+  let tagInput = document.getElementById('tag-input') as HTMLInputElement
+
+  let marker = global.map.markers.find(m => m.id === global.state.editingMarker)
+  let icon = global.state.icons.find(i => i.id === marker.icon)
+
+  title.innerText = 'Edit icon'
+  createButton.innerText = 'Save'
+  selectIcon(icon)
+  textInput.value = marker.text
+  tagInput.value = marker.tags.join('\n')
+
+  onInputChange()
+}
+
+export function prepareCreate() {
+  let title = document.getElementById('modal-title')
+  let createButton = document.getElementById('create-icon')
+  let textInput = document.getElementById('text-input') as HTMLInputElement
+  let tagInput = document.getElementById('tag-input') as HTMLInputElement
+  let selectIcon = document.getElementById('select-icon')
+
+  title.innerText = 'Create icon'
+  createButton.innerText = 'Create'
+  textInput.value = ''
+  tagInput.value = ''
+  selectIcon.innerHTML = 'Select Icon'
+  global.state.createIconSelected = undefined
+  global.state.editingMarker = undefined
+
+  onInputChange()
+}
+
+export function onCreate() {
+  let text = (document.getElementById('text-input') as HTMLInputElement).value
+  let tagInput = document.getElementById('tag-input') as HTMLInputElement
+  let tags = tagInput.value.split('\n')
+  global.state.addNewTags(tags)
+
+  if (global.state.editingMarker) {
+    let marker = global.map.markers.find(m => m.id === global.state.editingMarker)
+    marker.icon = global.state.createIconSelected.id
+    marker.text = text
+    marker.tags = tags
+  } else {
+    const marker = new Marker(
+      global.state.createIconSelected.id,
+      text,
+      global.canvas.selectedCoords,
+      tags
+    )
+    global.map.markers.push(marker)
+  }
+}
 
 export function populateIconList(list: HTMLElement) {
   list.innerHTML = ''
@@ -8,9 +67,7 @@ export function populateIconList(list: HTMLElement) {
     let elem = document.createElement('li')
     elem.classList.add('dropdown-item')
     elem.addEventListener('click', () => {
-      let selectIcon = document.getElementById('select-icon')
-      selectIcon.innerHTML = iconImage(icon)
-      global.state.createIconSelected = icon
+      selectIcon(icon)
 
       list.classList.remove('show')
       onInputChange()
@@ -28,14 +85,10 @@ export function onInputChange() {
   button.disabled = !(textarea.value && selectedIcon);
 }
 
-export function onModalClose() {
-  let textarea = document.getElementById('text-input') as HTMLInputElement
+function selectIcon(icon: Icon) {
   let selectIcon = document.getElementById('select-icon')
-
-  textarea.value = ''
-  selectIcon.innerHTML = 'Select Icon'
-  global.state.createIconSelected = undefined
-  onInputChange()
+  selectIcon.innerHTML = iconImage(icon)
+  global.state.createIconSelected = icon
 }
 
 function iconImage(icon: Icon): string {

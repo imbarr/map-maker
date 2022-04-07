@@ -22,6 +22,8 @@ export function tagSearch(value: string) {
   let list = document.getElementById('tag-search-list')
   let filtered = global.state.tags.filter(m => m.includes(value))
 
+  global.state.selectedTags = []
+
   list.innerHTML = ''
   filtered.forEach(el => {
     let elem = document.createElement('li')

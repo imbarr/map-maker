@@ -2,7 +2,7 @@ import { global } from '../global/global'
 import { search, searchCurrentValue } from '../interface/search'
 import { Map } from '../global/map/map'
 import { Marker } from '../global/map/marker'
-import { populateIconList, onInputChange, onModalClose } from '../interface/create-marker'
+import { populateIconList, onInputChange, prepareEdit, prepareCreate, onCreate } from '../interface/create-marker'
 // @ts-ignore
 import { v4 as uuid } from 'uuid';
 import { onMarkersEdited } from '../interface/common'
@@ -35,8 +35,38 @@ export function onSetImage() {
 }
 
 export function openContextMenu(event) {
+  let createIcon = document.getElementById('menu-create-icon')
+  let edit = document.getElementById('menu-edit')
+  let cut = document.getElementById('menu-cut')
+  let copy = document.getElementById('menu-copy')
+  let paste = document.getElementById('menu-paste')
+  let del = document.getElementById('menu-delete')
+
   event.preventDefault()
   global.canvas.setSelectedCoords(event.pageX, event.pageY)
+  global.state.selectedMarker = event.target.dataset.id
+
+  if (global.state.selectedMarker) {
+    createIcon.classList.add('hide')
+    edit.classList.remove('hide')
+    cut.classList.remove('hide')
+    copy.classList.remove('hide')
+    paste.classList.add('hide')
+    del.classList.remove('hide')
+  } else {
+    createIcon.classList.remove('hide')
+    edit.classList.add('hide')
+    cut.classList.add('hide')
+    copy.classList.add('hide')
+    paste.classList.remove('hide')
+    del.classList.add('hide')
+
+    if (global.state.copyingMarker || global.state.cuttingMarker) {
+      paste.classList.remove('hide')
+    } else {
+      paste.classList.add('hide')
+    }
+  }
 
   menu.style.top = `${event.clientY}px`
   menu.style.left = `${event.clientX}px`
@@ -48,12 +78,50 @@ export function closeContextMenu() {
 }
 
 export function onMenuCreateIcon() {
+  prepareCreate()
   modal.classList.add('show')
+}
+
+export function onMenuEdit() {
+  global.state.editingMarker = global.state.selectedMarker
+  prepareEdit()
+  modal.classList.add('show')
+}
+
+export function onMenuCut() {
+  global.state.copyingMarker = undefined
+  global.state.cuttingMarker = global.state.selectedMarker
+}
+
+export function onMenuCopy() {
+  global.state.cuttingMarker = undefined
+  global.state.copyingMarker = global.state.selectedMarker
+}
+
+export function onMenuPaste() {
+  let id = global.state.copyingMarker || global.state.cuttingMarker
+  let marker = global.map.markers.find(m => m.id === id)
+  let coords = global.canvas.selectedCoords
+
+  if (global.state.cuttingMarker) {
+    global.state.cuttingMarker = undefined
+    marker.coords = coords
+  } else {
+    let newMarker = marker.copy(coords)
+    global.map.markers.push(newMarker)
+  }
+
+  onMarkersEdited()
+}
+
+export function onMenuDelete() {
+  global.map.markers = global.map.markers
+    .filter(m => m.id !== global.state.selectedMarker)
+  onMarkersEdited()
 }
 
 export function onCloseModal() {
   modal.classList.remove('show')
-  onModalClose()
 }
 
 export function onModalClick(event) {
@@ -62,21 +130,8 @@ export function onModalClick(event) {
 }
 
 export function onCreateIcon() {
-  let text = (document.getElementById('text-input') as HTMLInputElement).value
-  let tagInput = document.getElementById('tag-input') as HTMLInputElement
-  let tags = tagInput.value.split('\n')
-  global.state.addNewTags(tags)
-
-  const marker = {
-    icon: global.state.createIconSelected.id,
-    text: text,
-    coords: global.canvas.selectedCoords,
-    tags: tags
-  }
-  global.map.markers.push(marker)
-  global.canvas.loadMap()
+  onCreate()
   modal.classList.remove('show')
-  onModalClose()
   onMarkersEdited()
 }
 

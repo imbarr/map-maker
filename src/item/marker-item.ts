@@ -6,11 +6,13 @@ import { markerSize } from '../global/constants/other'
 import { global } from '../global/global'
 
 export class MarkerItem implements Item {
+  id: string
   icon: string
   text: string
   coords: Coords
 
   constructor(m: Marker) {
+    this.id = m.id
     this.icon = m.icon
     this.text = m.text
     this.coords = m.coords
@@ -29,6 +31,8 @@ export class MarkerItem implements Item {
     let template = document.createElement('template')
     template.innerHTML = `<div class="marker">
                             <img src="${image.src}"
+                                 data-id="${this.id}"
+                                 class="marker-img"
                                  width="${markerSize}px"
                                  height="${markerSize}px"
                                  alt="not found"/>

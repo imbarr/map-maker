@@ -8,6 +8,10 @@ export class State {
   icons: Icon[]
   tags: string[]
   selectedTags: string[]
+  copyingMarker: string
+  cuttingMarker: string
+  editingMarker: string
+  selectedMarker: string
 
   createIconSelected: Icon
 
