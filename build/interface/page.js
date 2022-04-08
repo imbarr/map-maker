@@ -4,10 +4,18 @@ export function populatePageList() {
   list.innerHTML = '';
   global.map.pages.forEach(addPage);
 }
+export function setPageName(p, name) {
+  let list = document.getElementById('page-list');
+  let child = Array.from(list.children).find(c => c.dataset.page === p.name);
+  let span = child.getElementsByTagName('span')[0];
+  child.dataset.page = name;
+  span.innerText = name;
+}
 export function addPage(p) {
   let list = document.getElementById('page-list');
   let elem = document.createElement('li');
-  elem.innerHTML = `${p.name} <div class="page-bleep hide" data-id="${p.name}"></div>`;
+  elem.setAttribute('data-page', p.name);
+  elem.innerHTML = `<span>${p.name}</span> <div class="page-bleep hide" data-id="${p.name}"></div>`;
 
   if (global.state.selectedPage === p.name) {
     elem.classList.add('page-selected');

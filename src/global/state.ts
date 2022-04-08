@@ -17,6 +17,7 @@ export class State {
   selectedImage: HTMLImageElement
   pageStates: PageState[]
   createIconSelected: Icon
+  menuSelectedPage: string
 
   constructor() {
     this.filteredMarkers = []

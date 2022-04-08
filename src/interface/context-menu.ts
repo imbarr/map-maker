@@ -9,19 +9,20 @@ export function openContextMenu(event) {
   let paste = document.getElementById('menu-paste')
   let del = document.getElementById('menu-delete')
   let createPage = document.getElementById('menu-page-create')
+  let editPage = document.getElementById('menu-page-edit')
 
   let target = event.target
   let open =
     target.id === 'page-list' ||
     target.classList.contains('background-image') ||
-    target.dataset.id
+    target.dataset.id ||
+    target.parentElement.dataset.page
 
   event.preventDefault()
 
-  global.canvas.setSelectedCoords(event.pageX, event.pageY)
-  global.state.selectedMarker = event.target.dataset.id
+  if (target.dataset.id) {
+    global.state.selectedMarker = target.dataset.id
 
-  if (global.state.selectedMarker) {
     createIcon.classList.add('hide')
     edit.classList.remove('hide')
     cut.classList.remove('hide')
@@ -29,7 +30,10 @@ export function openContextMenu(event) {
     paste.classList.add('hide')
     del.classList.remove('hide')
     createPage.classList.add('hide')
+    editPage.classList.add('hide')
   } else if (target.classList.contains('background-image')) {
+    global.canvas.setSelectedCoords(event.pageX, event.pageY)
+
     createIcon.classList.remove('hide')
     edit.classList.add('hide')
     cut.classList.add('hide')
@@ -37,6 +41,7 @@ export function openContextMenu(event) {
     paste.classList.remove('hide')
     del.classList.add('hide')
     createPage.classList.add('hide')
+    editPage.classList.add('hide')
 
     if (global.state.copyingMarker || global.state.cuttingMarker) {
       paste.classList.remove('hide')
@@ -51,6 +56,18 @@ export function openContextMenu(event) {
     paste.classList.add('hide')
     del.classList.add('hide')
     createPage.classList.remove('hide')
+    editPage.classList.add('hide')
+  } else if (target.parentElement.dataset.page) {
+    global.state.menuSelectedPage = target.parentElement.dataset.page
+
+    createIcon.classList.add('hide')
+    edit.classList.add('hide')
+    cut.classList.add('hide')
+    copy.classList.add('hide')
+    paste.classList.add('hide')
+    del.classList.add('hide')
+    createPage.classList.add('hide')
+    editPage.classList.remove('hide')
   }
 
   if (open) {

@@ -8,10 +8,21 @@ export function populatePageList() {
   global.map.pages.forEach(addPage)
 }
 
+export function setPageName(p: Page, name: string) {
+  let list = document.getElementById('page-list')
+  let child = Array.from(list.children)
+    .find(c => (c as HTMLElement).dataset.page === p.name) as HTMLElement
+  let span = child.getElementsByTagName('span')[0]
+
+  child.dataset.page = name
+  span.innerText = name
+}
+
 export function addPage(p: Page) {
   let list = document.getElementById('page-list')
   let elem = document.createElement('li')
-  elem.innerHTML = `${p.name} <div class="page-bleep hide" data-id="${p.name}"></div>`
+  elem.setAttribute('data-page', p.name)
+  elem.innerHTML = `<span>${p.name}</span> <div class="page-bleep hide" data-id="${p.name}"></div>`
 
   if (global.state.selectedPage === p.name) {
     elem.classList.add('page-selected')

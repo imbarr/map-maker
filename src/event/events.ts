@@ -9,8 +9,8 @@ import { onMarkersEdited } from '../interface/common'
 import { onCheckAll, tagSearch } from '../interface/tag'
 import { openContextMenu } from '../interface/context-menu'
 import { Page } from '../global/map/page'
-import { onPageInputChange } from '../interface/create-page'
-import { addPage } from '../interface/page'
+import { onPageInputChange, pagePrepareCreate, pagePrepareEdit } from '../interface/create-page'
+import { addPage, setPageName } from '../interface/page'
 
 export function onSetImage() {
   let input = document.createElement('input')
@@ -97,6 +97,13 @@ export function onMenuDelete() {
 }
 
 export function onMenuPageCreate() {
+  pagePrepareCreate()
+  let modal = document.getElementById('create-page-modal')
+  modal.classList.add('show')
+}
+
+export function onMenuPageEdit() {
+  pagePrepareEdit()
   let modal = document.getElementById('create-page-modal')
   modal.classList.add('show')
 }
@@ -211,9 +218,20 @@ export function onPageTextInputChange() {
 export function onPageCreate() {
   let name = document.getElementById('page-text-input') as HTMLInputElement
 
-  let page = new Page(name.value, global.state.selectedImage)
-  global.map.pages.push(page)
-  addPage(page)
+  if (global.state.menuSelectedPage) {
+    let page = global.map.pages.find(p => p.name === global.state.menuSelectedPage)
+    setPageName(page, name.value)
+    global.map.markers.filter(m => m.page === page.name)
+      .forEach(m => m.page = name.value)
+    global.state.pageStates.find(s => s.name === page.name).name = name.value
+
+    page.name = name.value
+    page.image = global.state.selectedImage
+  } else {
+    let page = new Page(name.value, global.state.selectedImage)
+    global.map.pages.push(page)
+    addPage(page)
+  }
 
   let modal = document.getElementById('create-page-modal')
   modal.classList.remove('show')

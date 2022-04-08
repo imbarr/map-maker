@@ -48,6 +48,7 @@
       <li class="dropdown-item hide" id="menu-delete">Delete</li>
 
       <li class="dropdown-item hide" id="menu-page-create">Create page</li>
+      <li class="dropdown-item hide" id="menu-page-edit">Edit</li>
     </ul>
 
     <div id="create-marker-modal" class="modal fade">
@@ -85,7 +86,7 @@
       <div class="modal-dialog">
         <div id="create-page-modal-content" class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Create page</h5>
+            <h5 class="modal-title" id="create-page-header">Create page</h5>
             <button type="button" id="close-page-modal" class="btn-close"></button>
           </div>
           <div class="modal-body">
@@ -95,7 +96,7 @@
             </button>
 
             <label class="form-label" for="page-text-input">Name</label>
-            <textarea id="page-text-input"></textarea>
+            <input id="page-text-input" />
           </div>
           <div class="modal-footer">
             <button type="button" id="create-page" class="btn btn-primary" disabled>Create</button>

@@ -12,7 +12,8 @@ document.getElementById('menu-cut').addEventListener('click', event.onMenuCut);
 document.getElementById('menu-copy').addEventListener('click', event.onMenuCopy);
 document.getElementById('menu-paste').addEventListener('click', event.onMenuPaste);
 document.getElementById('menu-delete').addEventListener('click', event.onMenuDelete);
-document.getElementById('menu-page-create').addEventListener('click', event.onMenuPageCreate); // Create marker modal
+document.getElementById('menu-page-create').addEventListener('click', event.onMenuPageCreate);
+document.getElementById('menu-page-edit').addEventListener('click', event.onMenuPageEdit); // Create marker modal
 
 document.getElementById('close-marker-modal').addEventListener('click', event.onCloseMarkerModal);
 document.getElementById('create-marker-modal').addEventListener('click', event.onCloseMarkerModal);
