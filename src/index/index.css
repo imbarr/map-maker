@@ -14,7 +14,7 @@ html, body {
 #container {
     height: 100%;
     display: grid;
-    grid-template-rows: min-content 1fr 1fr;
+    grid-template-rows: min-content 1fr 1fr 1fr;
     grid-template-columns: 200px 1fr;
 }
 
@@ -35,13 +35,18 @@ html, body {
     grid-column: 1;
 }
 
+#page-list {
+    grid-row: 4;
+    grid-column: 1;
+}
+
 .menubutton {
     margin: 3px
 }
 
 #workspace {
     grid-column: 2;
-    grid-row-start: span 2;
+    grid-row-start: span 3;
     position: relative;
     background-color: darkgrey;
     overflow: scroll;
@@ -103,6 +108,22 @@ html, body {
     width: 172px;
     border: 1px solid grey;
     border-radius: .25rem;
+}
+
+#page-list {
+    border-top: 3px solid black;
+    padding: 5px;
+}
+
+#page-list li {
+    list-style-type: none;
+    cursor: pointer;
+    overflow-wrap: break-word;
+    margin-bottom: 5px;
+}
+
+#page-list .page-selected {
+    background-color: lightblue;
 }
 
 #modal.show {
@@ -192,10 +213,18 @@ html, body {
     transform: translate(-50%, -50%);
     border: 5px solid red;
     border-radius: 25px;
-    display: none;
     z-index: 100;
 }
 
-#bleep.show {
-    display: block;
+.page-bleep {
+    width: 6px;
+    height: 6px;
+    background-color: red;
+    border-radius: 3px;
+    top: 0;
+    display: inline-block;
+}
+
+.page-bleep.hide {
+    display: none;
 }

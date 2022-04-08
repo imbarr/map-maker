@@ -1,10 +1,6 @@
 export class Map {
-  constructor(image, markers) {
-    if (markers === undefined) {
-      markers = [];
-    }
-
-    this.image = image;
+  constructor(markers, pages) {
+    this.pages = pages;
     this.markers = markers;
   }
 

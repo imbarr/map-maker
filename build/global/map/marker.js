@@ -1,8 +1,9 @@
 // @ts-ignore
 import { v4 as uuid } from 'uuid';
 export class Marker {
-  constructor(icon, text, coords, tags) {
+  constructor(icon, page, text, coords, tags) {
     this.id = uuid();
+    this.page = page;
     this.icon = icon;
     this.text = text;
     this.coords = coords;

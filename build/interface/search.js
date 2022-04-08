@@ -26,6 +26,14 @@ export function searchCurrentValue() {
 }
 
 function bleep(marker) {
+  if (marker.page === global.state.selectedPage) {
+    bleepCurrentPage(marker);
+  } else {
+    bleepAnotherPage(marker);
+  }
+}
+
+function bleepCurrentPage(marker) {
   let coords = {
     x: marker.coords.x * global.canvas.scale,
     y: marker.coords.y * global.canvas.scale
@@ -33,13 +41,23 @@ function bleep(marker) {
   let bleep = document.getElementById('bleep');
   bleep.style.left = coords.x + 'px';
   bleep.style.top = coords.y + 'px';
-  bleep.classList.add('show');
+  bleepElement(bleep);
+}
+
+function bleepAnotherPage(marker) {
+  let bleeps = document.getElementsByClassName('page-bleep');
+  let bleep = Array.from(bleeps).find(b => b.dataset.id === marker.page);
+  bleepElement(bleep);
+}
+
+function bleepElement(el) {
+  el.classList.remove('hide');
   setTimeout(() => {
-    bleep.classList.remove('show');
+    el.classList.add('hide');
     setTimeout(() => {
-      bleep.classList.add('show');
+      el.classList.remove('hide');
       setTimeout(() => {
-        bleep.classList.remove('show');
+        el.classList.add('hide');
       }, 200);
     }, 200);
   }, 200);

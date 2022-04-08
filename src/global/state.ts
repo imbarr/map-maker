@@ -12,6 +12,7 @@ export class State {
   cuttingMarker: string
   editingMarker: string
   selectedMarker: string
+  selectedPage: string
 
   createIconSelected: Icon
 

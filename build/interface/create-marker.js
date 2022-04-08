@@ -42,7 +42,7 @@ export function onCreate() {
     marker.text = text;
     marker.tags = tags;
   } else {
-    const marker = new Marker(global.state.createIconSelected.id, text, global.canvas.selectedCoords, tags);
+    const marker = new Marker(global.state.createIconSelected.id, global.state.selectedPage, text, global.canvas.selectedCoords, tags);
     global.map.markers.push(marker);
   }
 }

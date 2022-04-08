@@ -53,6 +53,7 @@ export function onCreate() {
   } else {
     const marker = new Marker(
       global.state.createIconSelected.id,
+      global.state.selectedPage,
       text,
       global.canvas.selectedCoords,
       tags

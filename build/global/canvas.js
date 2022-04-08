@@ -17,12 +17,13 @@ export class Canvas {
 
   loadMap() {
     let mapItem = new MapItem();
-    global.state.filteredMarkers.forEach(m => mapItem.addMarker(new MarkerItem(m)));
-    let img = global.map.image;
-    mapItem.setImage(img.src);
+    let page = global.map.pages.find(p => p.name === global.state.selectedPage);
+    let markers = global.state.filteredMarkers.filter(m => m.page === global.state.selectedPage);
+    markers.forEach(m => mapItem.addMarker(new MarkerItem(m)));
+    mapItem.setImage(page.image.src);
     let size = {
-      width: img.naturalWidth,
-      height: img.naturalHeight
+      width: page.image.naturalWidth,
+      height: page.image.naturalHeight
     };
     this.setMap(mapItem, size);
     this.render();

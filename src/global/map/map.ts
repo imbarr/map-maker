@@ -1,15 +1,12 @@
 import { Marker } from './marker'
+import { Page } from './page'
 
 export class Map {
-  image: HTMLImageElement
   markers: Marker[]
+  pages: Page[]
 
-  constructor(image: HTMLImageElement, markers: Marker[]) {
-    if (markers === undefined) {
-      markers = []
-    }
-
-    this.image = image
+  constructor(markers: Marker[], pages: Page[]) {
+    this.pages = pages
     this.markers = markers
   }
 }
