@@ -20,7 +20,7 @@ export function onSetImage() {
     let img = new Image();
 
     img.onload = () => {
-      global.setMap(new Map([], [new Page('New page', img)]));
+      global.setMap(new Map([], [new Page(uuid(), 'New page', img)]));
     };
 
     img.onerror = () => {
@@ -40,7 +40,7 @@ export function closeContextMenu() {
   menu.classList.remove('show');
 }
 export function onScroll() {
-  let pageState = global.state.pageStates.find(s => s.name === global.state.selectedPage);
+  let pageState = global.state.pageStates.find(s => s.id === global.state.selectedPage);
   pageState.scrollLeft = global.canvas.html.parentElement.scrollLeft;
   pageState.scrollTop = global.canvas.html.parentElement.scrollTop;
 }
@@ -194,14 +194,12 @@ export function onPageCreate() {
   let name = document.getElementById('page-text-input');
 
   if (global.state.menuSelectedPage) {
-    let page = global.map.pages.find(p => p.name === global.state.menuSelectedPage);
+    let page = global.map.pages.find(p => p.id === global.state.menuSelectedPage);
     setPageName(page, name.value);
-    global.map.markers.filter(m => m.page === page.name).forEach(m => m.page = name.value);
-    global.state.pageStates.find(s => s.name === page.name).name = name.value;
     page.name = name.value;
     page.image = global.state.selectedImage;
   } else {
-    let page = new Page(name.value, global.state.selectedImage);
+    let page = new Page(uuid(), name.value, global.state.selectedImage);
     global.map.pages.push(page);
     addPage(page);
   }

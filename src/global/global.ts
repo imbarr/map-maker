@@ -19,7 +19,7 @@ class Global {
     this.map = map
     global.state.tags = []
     global.state.selectedTags = []
-    global.state.selectedPage = map.pages[0].name
+    global.state.selectedPage = map.pages[0].id
     map.markers.forEach(m => global.state.addNewTags(m.tags))
     onMarkersEdited()
     populatePageList()

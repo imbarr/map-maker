@@ -31,7 +31,7 @@ export class Canvas {
 
   loadMap() {
     let mapItem = new MapItem()
-    let page = global.map.pages.find(p => p.name === global.state.selectedPage)
+    let page = global.map.pages.find(p => p.id === global.state.selectedPage)
     let markers = global.state.filteredMarkers.filter(m => m.page === global.state.selectedPage)
 
     markers.forEach(m => mapItem.addMarker(new MarkerItem(m)))
@@ -110,7 +110,7 @@ export class Canvas {
     this.html.parentElement.scrollLeft = scrollNew.x
     this.html.parentElement.scrollTop = scrollNew.y
 
-    let pageState = global.state.pageStates.find(s => s.name === global.state.selectedPage)
+    let pageState = global.state.pageStates.find(s => s.id === global.state.selectedPage)
     pageState.scrollLeft = scrollNew.x
     pageState.scrollTop = scrollNew.y
     pageState.scale = this.scale

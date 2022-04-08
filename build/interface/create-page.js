@@ -17,7 +17,7 @@ export function pagePrepareEdit() {
   let button = document.getElementById('create-page');
   let selectImage = document.getElementById('select-image');
   let text = document.getElementById('page-text-input');
-  let page = global.map.pages.find(p => p.name === global.state.menuSelectedPage);
+  let page = global.map.pages.find(p => p.id === global.state.menuSelectedPage);
   header.innerText = 'Edit page';
   button.innerText = 'Save';
   selectImage.innerText = 'Select Image';

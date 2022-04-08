@@ -6,7 +6,7 @@ export function populatePageList() {
 }
 export function setPageName(p, name) {
   let list = document.getElementById('page-list');
-  let child = Array.from(list.children).find(c => c.dataset.page === p.name);
+  let child = Array.from(list.children).find(c => c.dataset.page === p.id);
   let span = child.getElementsByTagName('span')[0];
   child.dataset.page = name;
   span.innerText = name;
@@ -14,24 +14,24 @@ export function setPageName(p, name) {
 export function addPage(p) {
   let list = document.getElementById('page-list');
   let elem = document.createElement('li');
-  elem.setAttribute('data-page', p.name);
-  elem.innerHTML = `<span>${p.name}</span> <div class="page-bleep hide" data-id="${p.name}"></div>`;
+  elem.setAttribute('data-page', p.id);
+  elem.innerHTML = `<span>${p.name}</span> <div class="page-bleep hide" data-id="${p.id}"></div>`;
 
-  if (global.state.selectedPage === p.name) {
+  if (global.state.selectedPage === p.id) {
     elem.classList.add('page-selected');
   }
 
   elem.addEventListener('click', () => {
     Array.from(list.children).forEach(c => c.classList.remove('page-selected'));
-    global.state.selectedPage = p.name;
+    global.state.selectedPage = p.id;
     elem.classList.add('page-selected');
-    let pageState = global.state.pageStates.find(s => s.name === p.name);
+    let pageState = global.state.pageStates.find(s => s.id === p.id);
     global.canvas.loadMap();
     global.canvas.setState(pageState);
   });
   list.appendChild(elem);
   global.state.pageStates.push({
-    name: p.name,
+    id: p.id,
     scrollLeft: 0,
     scrollTop: 0,
     scale: 1

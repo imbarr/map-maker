@@ -223,10 +223,10 @@ html, body {
 }
 
 .page-bleep {
-    width: 6px;
-    height: 6px;
+    width: 10px;
+    height: 10px;
     background-color: red;
-    border-radius: 3px;
+    border-radius: 5px;
     top: 0;
     display: inline-block;
 }
