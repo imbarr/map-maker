@@ -13,6 +13,7 @@ export class State {
   editingMarker: string
   selectedMarker: string
   selectedPage: string
+  selectedImage: HTMLImageElement
 
   createIconSelected: Icon
 

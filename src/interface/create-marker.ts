@@ -4,7 +4,7 @@ import { Icon } from '../global/icon'
 import { Marker } from '../global/map/marker'
 
 export function prepareEdit() {
-  let title = document.getElementById('modal-title')
+  let title = document.getElementById('create-marker-modal-title')
   let createButton = document.getElementById('create-icon')
   let textInput = document.getElementById('text-input') as HTMLInputElement
   let tagInput = document.getElementById('tag-input') as HTMLInputElement
@@ -22,7 +22,7 @@ export function prepareEdit() {
 }
 
 export function prepareCreate() {
-  let title = document.getElementById('modal-title')
+  let title = document.getElementById('create-marker-modal-title')
   let createButton = document.getElementById('create-icon')
   let textInput = document.getElementById('text-input') as HTMLInputElement
   let tagInput = document.getElementById('tag-input') as HTMLInputElement

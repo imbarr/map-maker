@@ -11,7 +11,7 @@ export class Marker {
   }
 
   copy(coords) {
-    return new Marker(this.icon, this.text, coords, this.tags);
+    return new Marker(this.icon, this.page, this.text, coords, this.tags);
   }
 
 }

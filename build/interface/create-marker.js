@@ -2,7 +2,7 @@ import { global } from '../global/global';
 import { markerSize } from '../global/constants/other';
 import { Marker } from '../global/map/marker';
 export function prepareEdit() {
-  let title = document.getElementById('modal-title');
+  let title = document.getElementById('create-marker-modal-title');
   let createButton = document.getElementById('create-icon');
   let textInput = document.getElementById('text-input');
   let tagInput = document.getElementById('tag-input');
@@ -16,7 +16,7 @@ export function prepareEdit() {
   onInputChange();
 }
 export function prepareCreate() {
-  let title = document.getElementById('modal-title');
+  let title = document.getElementById('create-marker-modal-title');
   let createButton = document.getElementById('create-icon');
   let textInput = document.getElementById('text-input');
   let tagInput = document.getElementById('tag-input');

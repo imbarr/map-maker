@@ -6,8 +6,10 @@ import { populateIconList, onInputChange, prepareEdit, prepareCreate, onCreate }
 import { v4 as uuid } from 'uuid';
 import { onMarkersEdited } from '../interface/common';
 import { onCheckAll, tagSearch } from '../interface/tag';
-const menu = document.getElementById('contextmenu');
-const modal = document.getElementById('modal');
+import { openContextMenu } from '../interface/context-menu';
+import { Page } from '../global/map/page';
+import { onPageInputChange } from '../interface/create-page';
+import { addPage } from '../interface/page';
 export function onSetImage() {
   let input = document.createElement('input');
   input.type = 'file';
@@ -18,7 +20,7 @@ export function onSetImage() {
     let img = new Image();
 
     img.onload = () => {
-      global.setMap(new Map(img, []));
+      global.setMap(new Map([], [new Page('New page', img)]));
     };
 
     img.onerror = () => {
@@ -30,53 +32,22 @@ export function onSetImage() {
 
   input.click();
 }
-export function openContextMenu(event) {
-  let createIcon = document.getElementById('menu-create-icon');
-  let edit = document.getElementById('menu-edit');
-  let cut = document.getElementById('menu-cut');
-  let copy = document.getElementById('menu-copy');
-  let paste = document.getElementById('menu-paste');
-  let del = document.getElementById('menu-delete');
-  event.preventDefault();
-  global.canvas.setSelectedCoords(event.pageX, event.pageY);
-  global.state.selectedMarker = event.target.dataset.id;
-
-  if (global.state.selectedMarker) {
-    createIcon.classList.add('hide');
-    edit.classList.remove('hide');
-    cut.classList.remove('hide');
-    copy.classList.remove('hide');
-    paste.classList.add('hide');
-    del.classList.remove('hide');
-  } else {
-    createIcon.classList.remove('hide');
-    edit.classList.add('hide');
-    cut.classList.add('hide');
-    copy.classList.add('hide');
-    paste.classList.remove('hide');
-    del.classList.add('hide');
-
-    if (global.state.copyingMarker || global.state.cuttingMarker) {
-      paste.classList.remove('hide');
-    } else {
-      paste.classList.add('hide');
-    }
-  }
-
-  menu.style.top = `${event.clientY}px`;
-  menu.style.left = `${event.clientX}px`;
-  menu.classList.add('show');
+export function onOpenContextMenu(event) {
+  openContextMenu(event);
 }
 export function closeContextMenu() {
+  let menu = document.getElementById('contextmenu');
   menu.classList.remove('show');
 }
 export function onMenuCreateIcon() {
   prepareCreate();
+  let modal = document.getElementById('create-marker-modal');
   modal.classList.add('show');
 }
 export function onMenuEdit() {
   global.state.editingMarker = global.state.selectedMarker;
   prepareEdit();
+  let modal = document.getElementById('create-marker-modal');
   modal.classList.add('show');
 }
 export function onMenuCut() {
@@ -106,15 +77,53 @@ export function onMenuDelete() {
   global.map.markers = global.map.markers.filter(m => m.id !== global.state.selectedMarker);
   onMarkersEdited();
 }
-export function onCloseModal() {
+export function onMenuPageCreate() {
+  let modal = document.getElementById('create-page-modal');
+  modal.classList.add('show');
+}
+export function onCloseMarkerModal() {
+  let modal = document.getElementById('create-marker-modal');
   modal.classList.remove('show');
 }
-export function onModalClick(event) {
+export function onClosePageModal() {
+  let modal = document.getElementById('create-page-modal');
+  modal.classList.remove('show');
+}
+export function onMarkerModalClick(event) {
   document.getElementById('select-icon-list').classList.remove('show');
   event.stopPropagation();
 }
+export function onPageModalClick(event) {
+  event.stopPropagation();
+}
+export function onSelectImage() {
+  let button = document.getElementById('select-image');
+  let input = document.createElement('input');
+  input.type = 'file';
+  input.accept = 'image/*';
+
+  input.onchange = event => {
+    let file = event.target.files[0];
+    let img = new Image();
+
+    img.onload = () => {
+      global.state.selectedImage = img;
+      button.innerText = file.name;
+      onPageInputChange();
+    };
+
+    img.onerror = () => {
+      alert('Invalid image');
+    };
+
+    img.src = URL.createObjectURL(file);
+  };
+
+  input.click();
+}
 export function onCreateIcon() {
   onCreate();
+  let modal = document.getElementById('create-marker-modal');
   modal.classList.remove('show');
   onMarkersEdited();
 }
@@ -166,4 +175,15 @@ export function onAddIcon() {
 }
 export function onTextInputChange() {
   onInputChange();
+}
+export function onPageTextInputChange() {
+  onPageInputChange();
+}
+export function onPageCreate() {
+  let name = document.getElementById('page-text-input');
+  let page = new Page(name.value, global.state.selectedImage);
+  global.map.pages.push(page);
+  addPage(page);
+  let modal = document.getElementById('create-page-modal');
+  modal.classList.remove('show');
 }

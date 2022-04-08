@@ -46,14 +46,16 @@
       <li class="dropdown-item hide" id="menu-copy">Copy</li>
       <li class="dropdown-item hide" id="menu-paste">Paste</li>
       <li class="dropdown-item hide" id="menu-delete">Delete</li>
+
+      <li class="dropdown-item hide" id="menu-page-create">Create page</li>
     </ul>
 
-    <div id="modal" class="modal fade">
+    <div id="create-marker-modal" class="modal fade">
       <div class="modal-dialog">
-        <div id="modal-content" class="modal-content">
+        <div id="create-marker-modal-content" class="modal-content">
           <div class="modal-header">
-            <h5 id="modal-title" class="modal-title">Create icon</h5>
-            <button type="button" id="close-modal" class="btn-close"></button>
+            <h5 id="create-marker-modal-title" class="modal-title">Create icon</h5>
+            <button type="button" id="close-marker-modal" class="btn-close"></button>
           </div>
           <div class="modal-body">
             <span>Icon</span>
@@ -74,6 +76,29 @@
           </div>
           <div class="modal-footer">
             <button type="button" id="create-icon" class="btn btn-primary" disabled>Create</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="create-page-modal" class="modal fade">
+      <div class="modal-dialog">
+        <div id="create-page-modal-content" class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Create page</h5>
+            <button type="button" id="close-page-modal" class="btn-close"></button>
+          </div>
+          <div class="modal-body">
+            <span>Image</span>
+            <button type="button" class="btn btn-primary" id="select-image">
+              Select Image
+            </button>
+
+            <label class="form-label" for="page-text-input">Name</label>
+            <textarea id="page-text-input"></textarea>
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="create-page" class="btn btn-primary" disabled>Create</button>
           </div>
         </div>
       </div>
