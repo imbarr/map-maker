@@ -23,8 +23,17 @@ export function addPage(p: Page) {
     global.state.selectedPage = p.name
     elem.classList.add('page-selected')
 
+    let pageState = global.state.pageStates.find(s => s.name === p.name)
     global.canvas.loadMap()
+    global.canvas.setState(pageState)
   })
 
   list.appendChild(elem)
+
+  global.state.pageStates.push({
+    name: p.name,
+    scrollLeft: 0,
+    scrollTop: 0,
+    scale: 1
+  })
 }

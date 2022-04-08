@@ -2,6 +2,7 @@ import * as event from './events'
 
 document.getElementById('container').addEventListener('contextmenu', event.onOpenContextMenu)
 document.getElementById('container').addEventListener('click', event.closeContextMenu)
+document.getElementById('workspace').addEventListener('scroll', event.onScroll)
 
 // Menu
 document.getElementById('set-image').addEventListener('click', event.onSetImage)

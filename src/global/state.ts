@@ -2,6 +2,7 @@ import { Marker } from './map/marker'
 import { Icon } from './icon'
 import { IconsList } from './constants/icons'
 import { global } from './global'
+import { PageState } from './page-state'
 
 export class State {
   filteredMarkers: Marker[]
@@ -14,7 +15,7 @@ export class State {
   selectedMarker: string
   selectedPage: string
   selectedImage: HTMLImageElement
-
+  pageStates: PageState[]
   createIconSelected: Icon
 
   constructor() {
@@ -22,6 +23,7 @@ export class State {
     this.tags = []
     this.selectedTags = []
     this.icons = IconsList
+    this.pageStates = []
   }
 
   addNewTags(tags: string[]) {

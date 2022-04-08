@@ -44,6 +44,13 @@ export function closeContextMenu() {
   menu.classList.remove('show')
 }
 
+
+export function onScroll() {
+  let pageState = global.state.pageStates.find(s => s.name === global.state.selectedPage)
+  pageState.scrollLeft = global.canvas.html.parentElement.scrollLeft
+  pageState.scrollTop = global.canvas.html.parentElement.scrollTop
+}
+
 export function onMenuCreateIcon() {
   prepareCreate()
   let modal = document.getElementById('create-marker-modal')

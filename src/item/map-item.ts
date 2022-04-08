@@ -1,6 +1,6 @@
 import { MarkerItem } from './marker-item'
 import { Item } from './item'
-import { Canvas } from '../canvas/canvas'
+import { Canvas } from '../global/canvas'
 
 export class MapItem implements Item {
   image: string

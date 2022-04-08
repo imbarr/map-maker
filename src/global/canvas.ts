@@ -2,6 +2,7 @@ import { Coords, setSize, Size } from '../util'
 import { MapItem } from '../item/map-item'
 import { global } from './global'
 import { MarkerItem } from '../item/marker-item'
+import { PageState } from './page-state'
 
 const zoomStep = 1.1
 const initSize = {
@@ -66,6 +67,13 @@ export class Canvas {
     this.zoom(event, scale => scale / zoomStep)
   }
 
+  setState(state: PageState) {
+    this.scale = state.scale
+    this.render()
+    this.html.parentElement.scrollLeft = state.scrollLeft
+    this.html.parentElement.scrollTop = state.scrollTop
+  }
+
   private zoom(event: WheelEvent, scaleFunc: (scale: number) => number) {
     let offset = {
       x: this.html.parentElement.offsetLeft,
@@ -101,6 +109,12 @@ export class Canvas {
 
     this.html.parentElement.scrollLeft = scrollNew.x
     this.html.parentElement.scrollTop = scrollNew.y
+
+    let pageState = global.state.pageStates.find(s => s.name === global.state.selectedPage)
+    pageState.scrollLeft = scrollNew.x
+    pageState.scrollTop = scrollNew.y
+    pageState.scale = this.scale
+
     this.render()
   }
 

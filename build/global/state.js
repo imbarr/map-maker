@@ -5,6 +5,7 @@ export class State {
     this.tags = [];
     this.selectedTags = [];
     this.icons = IconsList;
+    this.pageStates = [];
   }
 
   addNewTags(tags) {

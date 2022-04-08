@@ -50,6 +50,13 @@ export class Canvas {
     this.zoom(event, scale => scale / zoomStep);
   }
 
+  setState(state) {
+    this.scale = state.scale;
+    this.render();
+    this.html.parentElement.scrollLeft = state.scrollLeft;
+    this.html.parentElement.scrollTop = state.scrollTop;
+  }
+
   zoom(event, scaleFunc) {
     let offset = {
       x: this.html.parentElement.offsetLeft,
@@ -78,6 +85,10 @@ export class Canvas {
     };
     this.html.parentElement.scrollLeft = scrollNew.x;
     this.html.parentElement.scrollTop = scrollNew.y;
+    let pageState = global.state.pageStates.find(s => s.name === global.state.selectedPage);
+    pageState.scrollLeft = scrollNew.x;
+    pageState.scrollTop = scrollNew.y;
+    pageState.scale = this.scale;
     this.render();
   }
 
