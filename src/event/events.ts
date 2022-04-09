@@ -1,16 +1,31 @@
 import { global } from '../global/global'
-import { search, searchCurrentValue } from '../interface/search'
+import { search } from '../interface/search'
 import { Map } from '../global/map/map'
-import { Marker } from '../global/map/marker'
 import { populateIconList, onInputChange, prepareEdit, prepareCreate, onCreate } from '../interface/create-marker'
 // @ts-ignore
 import { v4 as uuid } from 'uuid';
-import { onMarkersEdited } from '../interface/common'
+import { onMarkersEdited, onSetMap } from '../interface/common'
 import { onCheckAll, tagSearch } from '../interface/tag'
 import { openContextMenu } from '../interface/context-menu'
 import { Page } from '../global/map/page'
 import { onPageInputChange, pagePrepareCreate, pagePrepareEdit } from '../interface/create-page'
 import { addPage, setPageName } from '../interface/page'
+import { getFile, setFile } from '../file/convert'
+
+export function onFileMenu(event) {
+  event.stopPropagation()
+  let menu = document.getElementById('file-dropdown')
+  if (menu.classList.contains('show')) {
+    menu.classList.remove('show')
+  } else {
+    menu.classList.add('show')
+  }
+}
+
+export function onFileClick() {
+  let menu = document.getElementById('file-dropdown')
+  menu.classList.remove('show')
+}
 
 export function onSetImage() {
   let input = document.createElement('input')
@@ -22,7 +37,9 @@ export function onSetImage() {
 
     let img = new Image()
     img.onload = () => {
-      global.setMap(new Map([], [new Page(uuid(), 'New page', img)]))
+      global.setMap(new Map([], [
+        new Page(uuid(), 'New page', img, file)
+      ]))
     }
 
     img.onerror = () => {
@@ -35,6 +52,36 @@ export function onSetImage() {
   input.click()
 }
 
+export function onSave() {
+  getFile().then(f => {
+    let json = JSON.stringify(f)
+    let input = document.createElement('a')
+    input.setAttribute('href', 'data:application/json;charset=utf-8,' + json)
+    input.download = 'map.map'
+    input.click()
+  })
+}
+
+export function onLoad() {
+  let input = document.createElement('input')
+  input.type = 'file'
+  input.accept = '.map'
+
+  input.onchange = event => {
+    let file = (event.target as HTMLInputElement).files[0]
+    const reader = new FileReader();
+
+    reader.readAsText(file)
+    reader.onload = () => {
+      let data = JSON.parse(reader.result as string)
+      setFile(data)
+      setTimeout(() => onSetMap(), 500)
+    }
+  }
+
+  input.click()
+}
+
 export function onOpenContextMenu(event) {
   openContextMenu(event)
 }
@@ -42,6 +89,8 @@ export function onOpenContextMenu(event) {
 export function closeContextMenu() {
   let menu = document.getElementById('contextmenu')
   menu.classList.remove('show')
+  let file = document.getElementById('file-dropdown')
+  file.classList.remove('show')
 }
 
 
@@ -139,6 +188,7 @@ export function onSelectImage() {
     let img = new Image()
     img.onload = () => {
       global.state.selectedImage = img
+      global.state.selectedImageFile = file
       button.innerText = file.name
       onPageInputChange()
     }
@@ -194,7 +244,7 @@ export function onAddIcon() {
 
     let img = new Image()
     img.onload = () => {
-      global.state.icons.push({ id: uuid(), image: img })
+      global.state.icons.push({ id: uuid(), image: img, imageFile: file, custom: true })
     }
 
     img.onerror = () => {
@@ -225,7 +275,7 @@ export function onPageCreate() {
     page.name = name.value
     page.image = global.state.selectedImage
   } else {
-    let page = new Page(uuid(), name.value, global.state.selectedImage)
+    let page = new Page(uuid(), name.value, global.state.selectedImage, global.state.selectedImageFile)
     global.map.pages.push(page)
     addPage(page)
   }

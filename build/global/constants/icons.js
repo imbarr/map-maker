@@ -1,12 +1,5 @@
+import { Icon } from '../icon';
 const path = '/public/icons/';
-const messageImage = new Image();
-const enemyImage = new Image();
-messageImage.src = path + 'message.svg';
-enemyImage.src = path + 'enemy.svg';
-export const IconsList = [{
-  id: 'message',
-  image: messageImage
-}, {
-  id: 'enemy',
-  image: enemyImage
-}];
+const messagePath = path + 'message.svg';
+const enemyPath = path + 'enemy.svg';
+export const IconsList = [new Icon('message', messagePath), new Icon('enemy', enemyPath)];

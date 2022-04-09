@@ -15,5 +15,5 @@ let map = new Map([new Marker('message', '1', 'I am message', {
 }, ['enemy']), new Marker('enemy', '2', 'I am enemy', {
   x: 300,
   y: 300
-}, [])], [new Page('1', 'Stardew valley', img1), new Page('2', 'Valley of mines', img2)]);
+}, [])], [new Page('1', 'Stardew valley', img1, null), new Page('2', 'Valley of mines', img2, null)]);
 global.setMap(map);

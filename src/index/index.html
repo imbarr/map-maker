@@ -14,9 +14,12 @@
   <body>
     <div id="container">
       <div id="menubar">
-        <button class="btn" id="set-image">Set image</button>
-        <button class="btn">Save</button>
-        <button class="btn">Load</button>
+        <button class="btn dropdown-toggle" id="file-dropdown-button">File</button>
+        <ul class="dropdown-menu" id="file-dropdown">
+          <li class="dropdown-item" id="set-image">New from image</li>
+          <li class="dropdown-item" id="file-save">Save</li>
+          <li class="dropdown-item" id="file-load">Load</li>
+        </ul>
       </div>
       <div id="search">
         <div class="form-outline">

@@ -15,6 +15,7 @@ export class State {
   selectedMarker: string
   selectedPage: string
   selectedImage: HTMLImageElement
+  selectedImageFile: File
   pageStates: PageState[]
   createIconSelected: Icon
   menuSelectedPage: string

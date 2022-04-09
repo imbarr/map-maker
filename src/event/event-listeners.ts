@@ -5,7 +5,11 @@ document.getElementById('container').addEventListener('click', event.closeContex
 document.getElementById('workspace').addEventListener('scroll', event.onScroll)
 
 // Menu
+document.getElementById('file-dropdown-button').addEventListener('click', event.onFileMenu)
+document.getElementById('file-dropdown').addEventListener('click', event.onFileClick)
 document.getElementById('set-image').addEventListener('click', event.onSetImage)
+document.getElementById('file-save').addEventListener('click', event.onSave)
+document.getElementById('file-load').addEventListener('click', event.onLoad)
 
 // Context menu
 document.getElementById('contextmenu').addEventListener('click', event.closeContextMenu)
