@@ -2,10 +2,9 @@ import { Icon } from '../icon'
 
 const path = '/public/icons/'
 
-const messagePath = path + 'message.svg'
-const enemyPath = path + 'enemy.svg'
-
 export const IconsList: Icon[] = [
-  new Icon('message', messagePath),
-  new Icon('enemy', enemyPath),
+  new Icon('chest', path + 'chest.png'),
+  new Icon('compass', path + 'compass.png'),
+  new Icon('person', path + 'person.png'),
+  new Icon('scull', path + 'scull.png'),
 ]
