@@ -3,7 +3,7 @@ import { markerSize } from '../global/constants/other';
 export function search(value) {
   let list = document.getElementById('search-list');
   let selectedTags = global.state.selectedTags;
-  let filtered = global.map.markers.filter(m => m.text.includes(value) && (selectedTags.length === 0 || selectedTags.filter(t => m.tags.includes(t)).length !== 0));
+  let filtered = global.map.markers.filter(m => m.text.toLowerCase().includes(value.toLowerCase()) && (selectedTags.length === 0 || selectedTags.filter(t => m.tags.includes(t)).length !== 0));
   global.state.filteredMarkers = filtered;
   list.innerHTML = '';
   filtered.forEach(el => {

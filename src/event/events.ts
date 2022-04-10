@@ -74,8 +74,7 @@ export function onLoad() {
     reader.readAsText(file)
     reader.onload = () => {
       let data = JSON.parse(decodeURI(reader.result as string))
-      setFile(data)
-      setTimeout(() => onSetMap(), 500)
+      setFile(data).then(() => onSetMap())
     }
   }
 

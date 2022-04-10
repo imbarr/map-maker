@@ -68,8 +68,7 @@ export function onLoad() {
 
     reader.onload = () => {
       let data = JSON.parse(decodeURI(reader.result));
-      setFile(data);
-      setTimeout(() => onSetMap(), 500);
+      setFile(data).then(() => onSetMap());
     };
   };
 

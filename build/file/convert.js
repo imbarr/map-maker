@@ -37,24 +37,21 @@ export async function getFile() {
     }
   };
 }
-export function setFile(data) {
+export async function setFile(data) {
   global.state.icons = IconsList;
 
   for (let i = 0; i < data.icons.length; i++) {
     let icon = data.icons[i];
     let file = dataURLtoFile(icon.image);
     let img = new Image();
-
-    img.onload = () => {
-      global.state.icons.push({
-        id: icon.id,
-        image: img,
-        imageFile: file,
-        custom: true
-      });
-    };
-
     img.src = URL.createObjectURL(file);
+    await img.decode();
+    global.state.icons.push({
+      id: icon.id,
+      image: img,
+      imageFile: file,
+      custom: true
+    });
   }
 
   global.map = {
@@ -66,19 +63,16 @@ export function setFile(data) {
     let page = data.map.pages[i];
     let file = dataURLtoFile(page.image);
     let img = new Image();
-
-    img.onload = () => {
-      let p = new Page(page.id, page.name, img, file);
-      global.map.pages.push(p);
-      global.state.pageStates.push({
-        id: p.id,
-        scrollLeft: 0,
-        scrollTop: 0,
-        scale: 1
-      });
-    };
-
     img.src = URL.createObjectURL(file);
+    await img.decode();
+    let p = new Page(page.id, page.name, img, file);
+    global.map.pages.push(p);
+    global.state.pageStates.push({
+      id: p.id,
+      scrollLeft: 0,
+      scrollTop: 0,
+      scale: 1
+    });
   }
 }
 

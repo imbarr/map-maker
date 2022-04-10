@@ -30,16 +30,23 @@ html, body {
     grid-column: 1;
 	overflow-y: auto;
 	overflow-x: hidden;
+    border-top: 3px solid black;
 }
 
 #tag-search {
     grid-row: 3;
     grid-column: 1;
+    padding: 5px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border-top: 3px solid black;
 }
 
 #page-list {
     grid-row: 4;
     grid-column: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .menubutton {
@@ -87,11 +94,6 @@ html, body {
     overflow-wrap: break-word;
     margin-bottom: 5px;
     border-bottom: 1px solid black;
-}
-
-#tag-search {
-    padding: 5px;
-    border-top: 3px solid black;
 }
 
 #tag-search-list {
@@ -235,4 +237,12 @@ html, body {
 
 .page-bleep.hide {
     display: none;
+}
+
+#file-dropdown-button {
+    width: 170px;
+}
+
+#file-dropdown {
+    width: 170px;
 }

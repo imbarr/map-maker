@@ -20,7 +20,7 @@ export function onCheckAll() {
 
 export function tagSearch(value: string) {
   let list = document.getElementById('tag-search-list')
-  let filtered = global.state.tags.filter(m => m.includes(value))
+  let filtered = global.state.tags.filter(m => m.toLowerCase().includes(value.toLowerCase()))
 
   global.state.selectedTags = []
 
