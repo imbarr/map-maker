@@ -56,7 +56,7 @@ export function onSave() {
   getFile().then(f => {
     let json = JSON.stringify(f)
     let input = document.createElement('a')
-    input.setAttribute('href', 'data:application/json;charset=utf-8,' + json)
+    input.setAttribute('href', 'data:application/json;charset=utf-8,' + encodeURI(json))
     input.download = 'map.map'
     input.click()
   })
@@ -73,7 +73,7 @@ export function onLoad() {
 
     reader.readAsText(file)
     reader.onload = () => {
-      let data = JSON.parse(reader.result as string)
+      let data = JSON.parse(decodeURI(reader.result as string))
       setFile(data)
       setTimeout(() => onSetMap(), 500)
     }

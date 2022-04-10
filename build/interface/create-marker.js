@@ -33,7 +33,7 @@ export function prepareCreate() {
 export function onCreate() {
   let text = document.getElementById('text-input').value;
   let tagInput = document.getElementById('tag-input');
-  let tags = tagInput.value.split('\n');
+  let tags = tagInput.value.split('\n').map(t => t.trim()).filter(t => t.length > 0);
   global.state.addNewTags(tags);
 
   if (global.state.editingMarker) {
