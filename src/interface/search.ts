@@ -14,7 +14,7 @@ export function search(value: string) {
   list.innerHTML = ''
   filtered.forEach(el => {
     let elem = document.createElement('li')
-    let text = el.text.replace('\n', `<br>`)
+    let text = el.text.replace(/\n/g, `<br>`)
     let icon = global.state.icons.find(i => i.id === el.icon)
     elem.innerHTML = `<img src="${icon.image.src}"
                            width="${markerSize}px"

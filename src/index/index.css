@@ -166,8 +166,8 @@ html, body {
 .marker {
     line-height: 0;
     position: absolute;
-    height: 20px;
-    width: 20px;
+    height: 30px;
+    width: 30px;
     transform: translate(-50%, -50%);
 }
 
@@ -190,7 +190,7 @@ html, body {
     text-align: center;
     padding: 5px;
     position: absolute;
-    top: -5px;
+    top: 0;
     left: 105%;
 }
 

@@ -1,1 +1,1 @@
-export const markerSize = 20;
+export const markerSize = 30;
