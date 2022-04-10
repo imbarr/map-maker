@@ -28,6 +28,8 @@ html, body {
 #search {
     grid-row: 2;
     grid-column: 1;
+	overflow-y: auto;
+	overflow-x: hidden;
 }
 
 #tag-search {
