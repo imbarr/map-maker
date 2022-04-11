@@ -17,6 +17,7 @@ export class MarkerItem {
 
   getElement() {
     let image = global.state.icons.find(i => i.id === this.icon).image;
+    let text = this.text.replace(/\n/g, `<br>`);
     let template = document.createElement('template');
     template.innerHTML = `<div class="marker">
                             <img src="${image.src}"
@@ -25,7 +26,7 @@ export class MarkerItem {
                                  width="${markerSize}px"
                                  height="${markerSize}px"
                                  alt="not found"/>
-                            <span class="marker-tooltip">${this.text}</span>     
+                            <span class="marker-tooltip">${text}</span>     
                           </div>`;
     return template.content.firstChild;
   }
