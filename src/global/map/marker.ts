@@ -7,19 +7,21 @@ export class Marker {
   page: string
   icon: string
   text: string
+  desc: string
   coords: Coords
   tags: string[]
 
-  constructor(icon: string, page: string, text: string, coords: Coords, tags: string[]) {
+  constructor(icon: string, page: string, text: string, desc: string, coords: Coords, tags: string[]) {
     this.id = uuid()
     this.page = page
     this.icon = icon
     this.text = text
+    this.desc = desc
     this.coords = coords
     this.tags = [...tags]
   }
+}
 
-  copy(coords: Coords): Marker {
-    return new Marker(this.icon, this.page, this.text, coords, this.tags)
-  }
+export function copyMarker(marker: Marker, coords: Coords): Marker {
+  return new Marker(marker.icon, marker.page, marker.text, marker.desc, coords, marker.tags)
 }

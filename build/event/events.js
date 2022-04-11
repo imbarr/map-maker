@@ -11,6 +11,8 @@ import { Page } from '../global/map/page';
 import { onPageInputChange, pagePrepareCreate, pagePrepareEdit } from '../interface/create-page';
 import { addPage, setPageName } from '../interface/page';
 import { getFile, setFile } from '../file/convert';
+import { migrate } from '../file/migrate';
+import { copyMarker } from '../global/map/marker';
 export function onFileMenu(event) {
   event.stopPropagation();
   let menu = document.getElementById('file-dropdown');
@@ -68,6 +70,7 @@ export function onLoad() {
 
     reader.onload = () => {
       let data = JSON.parse(decodeURI(reader.result));
+      migrate(data);
       setFile(data).then(() => onSetMap());
     };
   };
@@ -116,7 +119,7 @@ export function onMenuPaste() {
     global.state.cuttingMarker = undefined;
     marker.coords = coords;
   } else {
-    let newMarker = marker.copy(coords);
+    let newMarker = copyMarker(marker, coords);
     global.map.markers.push(newMarker);
   }
 

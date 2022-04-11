@@ -7,6 +7,7 @@ export function prepareEdit() {
   let title = document.getElementById('create-marker-modal-title')
   let createButton = document.getElementById('create-icon')
   let textInput = document.getElementById('text-input') as HTMLInputElement
+  let descInput = document.getElementById('desc-input') as HTMLInputElement
   let tagInput = document.getElementById('tag-input') as HTMLInputElement
 
   let marker = global.map.markers.find(m => m.id === global.state.editingMarker)
@@ -16,6 +17,7 @@ export function prepareEdit() {
   createButton.innerText = 'Save'
   selectIcon(icon)
   textInput.value = marker.text
+  descInput.value = marker.desc
   tagInput.value = marker.tags.join('\n')
 
   onInputChange()
@@ -25,12 +27,14 @@ export function prepareCreate() {
   let title = document.getElementById('create-marker-modal-title')
   let createButton = document.getElementById('create-icon')
   let textInput = document.getElementById('text-input') as HTMLInputElement
+  let descInput = document.getElementById('desc-input') as HTMLInputElement
   let tagInput = document.getElementById('tag-input') as HTMLInputElement
   let selectIcon = document.getElementById('select-icon')
 
   title.innerText = 'Create icon'
   createButton.innerText = 'Create'
   textInput.value = ''
+  descInput.value = ''
   tagInput.value = ''
   selectIcon.innerHTML = 'Select Icon'
   global.state.createIconSelected = undefined
@@ -41,6 +45,7 @@ export function prepareCreate() {
 
 export function onCreate() {
   let text = (document.getElementById('text-input') as HTMLInputElement).value
+  let desc = (document.getElementById('desc-input') as HTMLInputElement).value
   let tagInput = document.getElementById('tag-input') as HTMLInputElement
   let tags = tagInput.value
     .split('\n')
@@ -52,12 +57,14 @@ export function onCreate() {
     let marker = global.map.markers.find(m => m.id === global.state.editingMarker)
     marker.icon = global.state.createIconSelected.id
     marker.text = text
+    marker.desc = desc
     marker.tags = tags
   } else {
     const marker = new Marker(
       global.state.createIconSelected.id,
       global.state.selectedPage,
       text,
+      desc,
       global.canvas.selectedCoords,
       tags
     )

@@ -6,6 +6,7 @@ export class MarkerItem {
     this.id = m.id;
     this.icon = m.icon;
     this.text = m.text;
+    this.desc = m.desc;
     this.coords = m.coords;
   }
 
@@ -18,6 +19,11 @@ export class MarkerItem {
   getElement() {
     let image = global.state.icons.find(i => i.id === this.icon).image;
     let text = this.text.replace(/\n/g, `<br>`);
+
+    if (this.desc) {
+      text += `<br><br>` + this.desc.replace(/\n/g, `<br>`);
+    }
+
     let template = document.createElement('template');
     template.innerHTML = `<div class="marker">
                             <img src="${image.src}"

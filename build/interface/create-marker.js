@@ -5,6 +5,7 @@ export function prepareEdit() {
   let title = document.getElementById('create-marker-modal-title');
   let createButton = document.getElementById('create-icon');
   let textInput = document.getElementById('text-input');
+  let descInput = document.getElementById('desc-input');
   let tagInput = document.getElementById('tag-input');
   let marker = global.map.markers.find(m => m.id === global.state.editingMarker);
   let icon = global.state.icons.find(i => i.id === marker.icon);
@@ -12,6 +13,7 @@ export function prepareEdit() {
   createButton.innerText = 'Save';
   selectIcon(icon);
   textInput.value = marker.text;
+  descInput.value = marker.desc;
   tagInput.value = marker.tags.join('\n');
   onInputChange();
 }
@@ -19,11 +21,13 @@ export function prepareCreate() {
   let title = document.getElementById('create-marker-modal-title');
   let createButton = document.getElementById('create-icon');
   let textInput = document.getElementById('text-input');
+  let descInput = document.getElementById('desc-input');
   let tagInput = document.getElementById('tag-input');
   let selectIcon = document.getElementById('select-icon');
   title.innerText = 'Create icon';
   createButton.innerText = 'Create';
   textInput.value = '';
+  descInput.value = '';
   tagInput.value = '';
   selectIcon.innerHTML = 'Select Icon';
   global.state.createIconSelected = undefined;
@@ -32,6 +36,7 @@ export function prepareCreate() {
 }
 export function onCreate() {
   let text = document.getElementById('text-input').value;
+  let desc = document.getElementById('desc-input').value;
   let tagInput = document.getElementById('tag-input');
   let tags = tagInput.value.split('\n').map(t => t.trim()).filter(t => t.length > 0);
   global.state.addNewTags(tags);
@@ -40,9 +45,10 @@ export function onCreate() {
     let marker = global.map.markers.find(m => m.id === global.state.editingMarker);
     marker.icon = global.state.createIconSelected.id;
     marker.text = text;
+    marker.desc = desc;
     marker.tags = tags;
   } else {
-    const marker = new Marker(global.state.createIconSelected.id, global.state.selectedPage, text, global.canvas.selectedCoords, tags);
+    const marker = new Marker(global.state.createIconSelected.id, global.state.selectedPage, text, desc, global.canvas.selectedCoords, tags);
     global.map.markers.push(marker);
   }
 }

@@ -3,10 +3,11 @@ import { Marker } from '../global/map/marker'
 import { markerSize } from '../global/constants/other'
 
 export function search(value: string) {
+  let valueLower = value.toLowerCase()
   let list = document.getElementById('search-list')
   let selectedTags = global.state.selectedTags
   let filtered = global.map.markers.filter(m =>
-    m.text.toLowerCase().includes(value.toLowerCase()) &&
+    (m.text.toLowerCase().includes(valueLower) || m.desc.toLowerCase().includes(valueLower)) &&
     (selectedTags.length === 0 || selectedTags.filter(t => m.tags.includes(t)).length !== 0)
   )
   global.state.filteredMarkers = filtered

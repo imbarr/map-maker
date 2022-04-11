@@ -147,6 +147,10 @@ html, body {
 
 #text-input {
     grid-column-start: span 2;
+}
+
+#desc-input {
+    grid-column-start: span 2;
     height: 100px;
 }
 
