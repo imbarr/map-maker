@@ -7,4 +7,5 @@ export const IconsList: Icon[] = [
   new Icon('compass', path + 'compass.png'),
   new Icon('person', path + 'person.png'),
   new Icon('scull', path + 'scull.png'),
+  new Icon('loot', path + 'loot.png'),
 ]
