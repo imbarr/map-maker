@@ -48,7 +48,7 @@ export function onCreate() {
     marker.desc = desc;
     marker.tags = tags;
   } else {
-    const marker = new Marker(global.state.createIconSelected.id, global.state.selectedPage, text, desc, global.canvas.selectedCoords, tags);
+    const marker = new Marker(global.state.createIconSelected.id, global.state.selectedPage, global.state.selectedFloor, text, desc, global.canvas.selectedCoords, tags);
     global.map.markers.push(marker);
   }
 }

@@ -35,6 +35,7 @@
         <ul id="tag-search-list"></ul>
       </div>
       <ul id="page-list"></ul>
+      <ul id="floor-list"></ul>
       <div id="workspace">
         <div id="canvas">
         </div>
@@ -52,6 +53,9 @@
 
       <li class="dropdown-item hide" id="menu-page-create">Create page</li>
       <li class="dropdown-item hide" id="menu-page-edit">Edit</li>
+
+      <li class="dropdown-item hide" id="menu-floor-create">Create floor</li>
+      <li class="dropdown-item hide" id="menu-floor-edit">Edit</li>
     </ul>
 
     <div id="create-marker-modal" class="modal fade">
@@ -95,7 +99,7 @@
             <button type="button" id="close-page-modal" class="btn-close"></button>
           </div>
           <div class="modal-body">
-            <span>Image</span>
+            <span id="select-image-title">Image</span>
             <button type="button" class="btn btn-primary" id="select-image">
               Select Image
             </button>

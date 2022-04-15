@@ -61,6 +61,7 @@ export async function setFile(data: FileData) {
     global.map.pages.push(p)
     global.state.pageStates.push({
       id: p.id,
+      selectedFloor: p.floors[0].id,
       scrollLeft: 0,
       scrollTop: 0,
       scale: 1

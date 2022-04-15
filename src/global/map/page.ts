@@ -1,13 +1,13 @@
+import { Floor } from './floor'
+
 export class Page {
   id: string
   name: string
-  image: HTMLImageElement
-  imageFile: Blob
+  floors: Floor[]
 
-  constructor(id: string, name: string, image: HTMLImageElement, file: Blob) {
+  constructor(id: string, name: string, floors: Floor[]) {
     this.id = id
     this.name = name
-    this.image = image
-    this.imageFile = file
+    this.floors = floors
   }
 }

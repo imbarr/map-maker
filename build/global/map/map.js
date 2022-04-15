@@ -4,4 +4,8 @@ export class Map {
     this.markers = markers;
   }
 
+  getAllFloors() {
+    return this.pages.flatMap(p => p.floors);
+  }
+
 }

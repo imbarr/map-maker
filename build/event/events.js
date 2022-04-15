@@ -8,11 +8,13 @@ import { onMarkersEdited, onSetMap } from '../interface/common';
 import { onCheckAll, tagSearch } from '../interface/tag';
 import { openContextMenu } from '../interface/context-menu';
 import { Page } from '../global/map/page';
-import { onPageInputChange, pagePrepareCreate, pagePrepareEdit } from '../interface/create-page';
+import { Floor } from '../global/map/floor';
+import { floorPrepareCreate, floorPrepareEdit, onPageInputChange, pagePrepareCreate, pagePrepareEdit } from '../interface/create-page';
 import { addPage, setPageName } from '../interface/page';
 import { getFile, setFile } from '../file/convert';
 import { migrate } from '../file/migrate';
 import { copyMarker } from '../global/map/marker';
+import { addFloor, setFloorName } from '../interface/floor';
 export function onFileMenu(event) {
   event.stopPropagation();
   let menu = document.getElementById('file-dropdown');
@@ -37,7 +39,7 @@ export function onSetImage() {
     let img = new Image();
 
     img.onload = () => {
-      global.setMap(new Map([], [new Page(uuid(), 'New page', img, file)]));
+      global.setMap(new Map([], [new Page(uuid(), 'New page', [new Floor(uuid(), 'Floor 1', img, file)])]));
     };
 
     img.onerror = () => {
@@ -130,12 +132,24 @@ export function onMenuDelete() {
   onMarkersEdited();
 }
 export function onMenuPageCreate() {
+  global.state.menuCreatePage = true;
   pagePrepareCreate();
   let modal = document.getElementById('create-page-modal');
   modal.classList.add('show');
 }
 export function onMenuPageEdit() {
   pagePrepareEdit();
+  let modal = document.getElementById('create-page-modal');
+  modal.classList.add('show');
+}
+export function onMenuFloorCreate() {
+  global.state.menuCreatePage = false;
+  floorPrepareCreate();
+  let modal = document.getElementById('create-page-modal');
+  modal.classList.add('show');
+}
+export function onMenuFloorEdit() {
+  floorPrepareEdit();
   let modal = document.getElementById('create-page-modal');
   modal.classList.add('show');
 }
@@ -247,11 +261,18 @@ export function onPageCreate() {
     let page = global.map.pages.find(p => p.id === global.state.menuSelectedPage);
     setPageName(page, name.value);
     page.name = name.value;
-    page.image = global.state.selectedImage;
-  } else {
-    let page = new Page(uuid(), name.value, global.state.selectedImage, global.state.selectedImageFile);
+  } else if (global.state.menuSelectedFloor) {
+    let floor = global.map.getAllFloors().find(f => f.id === global.state.menuSelectedFloor);
+    setFloorName(floor, name.value);
+    floor.name = name.value;
+  } else if (global.state.menuCreatePage) {
+    let page = new Page(uuid(), name.value, [new Floor(uuid(), 'Floor 1', global.state.selectedImage, global.state.selectedImageFile)]);
     global.map.pages.push(page);
     addPage(page);
+  } else {
+    let floor = new Floor(uuid(), name.value, global.state.selectedImage, global.state.selectedImageFile);
+    global.map.pages.find(p => p.id === global.state.selectedPage).floors.push(floor);
+    addFloor(floor);
   }
 
   let modal = document.getElementById('create-page-modal');

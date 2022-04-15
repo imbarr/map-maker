@@ -1,9 +1,8 @@
 export class Page {
-  constructor(id, name, image, file) {
+  constructor(id, name, floors) {
     this.id = id;
     this.name = name;
-    this.image = image;
-    this.imageFile = file;
+    this.floors = floors;
   }
 
 }

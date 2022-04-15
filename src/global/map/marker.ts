@@ -4,16 +4,16 @@ import { v4 as uuid } from 'uuid';
 
 export class Marker {
   id: string
-  page: string
+  floor: string
   icon: string
   text: string
   desc: string
   coords: Coords
   tags: string[]
 
-  constructor(icon: string, page: string, text: string, desc: string, coords: Coords, tags: string[]) {
+  constructor(icon: string, floor: string, text: string, desc: string, coords: Coords, tags: string[]) {
     this.id = uuid()
-    this.page = page
+    this.floor = floor
     this.icon = icon
     this.text = text
     this.desc = desc
@@ -23,5 +23,5 @@ export class Marker {
 }
 
 export function copyMarker(marker: Marker, coords: Coords): Marker {
-  return new Marker(marker.icon, marker.page, marker.text, marker.desc, coords, marker.tags)
+  return new Marker(marker.icon, marker.floor, marker.text, marker.desc, coords, marker.tags)
 }

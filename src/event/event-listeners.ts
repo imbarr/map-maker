@@ -21,6 +21,8 @@ document.getElementById('menu-paste').addEventListener('click', event.onMenuPast
 document.getElementById('menu-delete').addEventListener('click', event.onMenuDelete)
 document.getElementById('menu-page-create').addEventListener('click', event.onMenuPageCreate)
 document.getElementById('menu-page-edit').addEventListener('click', event.onMenuPageEdit)
+document.getElementById('menu-floor-create').addEventListener('click', event.onMenuFloorCreate)
+document.getElementById('menu-floor-edit').addEventListener('click', event.onMenuFloorEdit)
 
 
 // Create marker modal

@@ -1,9 +1,9 @@
 // @ts-ignore
 import { v4 as uuid } from 'uuid';
 export class Marker {
-  constructor(icon, page, text, desc, coords, tags) {
+  constructor(icon, floor, text, desc, coords, tags) {
     this.id = uuid();
-    this.page = page;
+    this.floor = floor;
     this.icon = icon;
     this.text = text;
     this.desc = desc;
@@ -13,5 +13,5 @@ export class Marker {
 
 }
 export function copyMarker(marker, coords) {
-  return new Marker(marker.icon, marker.page, marker.text, marker.desc, coords, marker.tags);
+  return new Marker(marker.icon, marker.floor, marker.text, marker.desc, coords, marker.tags);
 }

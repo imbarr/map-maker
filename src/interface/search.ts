@@ -34,14 +34,18 @@ export function searchCurrentValue() {
 }
 
 function bleep(marker: Marker) {
-  if (marker.page === global.state.selectedPage) {
+  let page = global.map.pages.find(p => p.floors.some(f => f.id === marker.floor)).id
+
+  if (marker.floor === global.state.selectedFloor) {
+    bleepCurrentFloor(marker)
+  } else if (page === global.state.selectedPage) {
     bleepCurrentPage(marker)
   } else {
-    bleepAnotherPage(marker)
+    bleepAnotherPage(page)
   }
 }
 
-function bleepCurrentPage(marker: Marker) {
+function bleepCurrentFloor(marker: Marker) {
   let coords = {
     x: marker.coords.x * global.canvas.scale,
     y: marker.coords.y * global.canvas.scale
@@ -54,9 +58,16 @@ function bleepCurrentPage(marker: Marker) {
   bleepElement(bleep)
 }
 
-function bleepAnotherPage(marker: Marker) {
+function bleepAnotherPage(page: string) {
   let bleeps = document.getElementsByClassName('page-bleep')
-  let bleep = Array.from(bleeps).find(b => (b as HTMLElement).dataset.id === marker.page)
+  let bleep = Array.from(bleeps).find(b => (b as HTMLElement).dataset.page === page)
+
+  bleepElement(bleep as HTMLElement)
+}
+
+function bleepCurrentPage(marker: Marker) {
+  let bleeps = document.getElementsByClassName('page-bleep')
+  let bleep = Array.from(bleeps).find(b => (b as HTMLElement).dataset.floor === marker.floor)
 
   bleepElement(bleep as HTMLElement)
 }

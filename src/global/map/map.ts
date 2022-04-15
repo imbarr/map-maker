@@ -1,5 +1,6 @@
 import { Marker } from './marker'
 import { Page } from './page'
+import { Floor } from './floor'
 
 export class Map {
   markers: Marker[]
@@ -8,5 +9,9 @@ export class Map {
   constructor(markers: Marker[], pages: Page[]) {
     this.pages = pages
     this.markers = markers
+  }
+
+  getAllFloors(): Floor[] {
+    return this.pages.flatMap(p => p.floors)
   }
 }

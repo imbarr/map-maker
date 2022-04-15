@@ -63,6 +63,7 @@ export function onCreate() {
     const marker = new Marker(
       global.state.createIconSelected.id,
       global.state.selectedPage,
+      global.state.selectedFloor,
       text,
       desc,
       global.canvas.selectedCoords,

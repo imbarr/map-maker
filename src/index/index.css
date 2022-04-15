@@ -14,13 +14,13 @@ html, body {
 #container {
     height: 100%;
     display: grid;
-    grid-template-rows: min-content 1fr 1fr 1fr;
-    grid-template-columns: 200px 1fr;
+    grid-template-rows: min-content 1fr 1fr;
+    grid-template-columns: 200px 1fr 200px;
 }
 
 #menubar {
     grid-row: 1;
-    grid-column-start: span 2;
+    grid-column-start: span 3;
     padding: 5px;
     background-color: white;
 }
@@ -43,10 +43,21 @@ html, body {
 }
 
 #page-list {
-    grid-row: 4;
-    grid-column: 1;
+    border-top: 3px solid black;
+    grid-row: 2;
+    grid-column: 3;
     overflow-y: auto;
     overflow-x: hidden;
+    padding: 5px;
+}
+
+#floor-list {
+    border-top: 3px solid black;
+    grid-row: 3;
+    grid-column: 3;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 5px;
 }
 
 .menubutton {
@@ -55,7 +66,7 @@ html, body {
 
 #workspace {
     grid-column: 2;
-    grid-row-start: span 3;
+    grid-row-start: span 2;
     position: relative;
     background-color: darkgrey;
     overflow: scroll;
@@ -114,11 +125,6 @@ html, body {
     border-radius: .25rem;
 }
 
-#page-list {
-    border-top: 3px solid black;
-    padding: 5px;
-}
-
 #page-list li {
     list-style-type: none;
     cursor: pointer;
@@ -126,7 +132,14 @@ html, body {
     margin-bottom: 5px;
 }
 
-#page-list .page-selected {
+#floor-list li {
+    list-style-type: none;
+    cursor: pointer;
+    overflow-wrap: break-word;
+    margin-bottom: 5px;
+}
+
+.page-selected {
     background-color: lightblue;
 }
 

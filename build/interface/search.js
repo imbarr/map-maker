@@ -27,14 +27,18 @@ export function searchCurrentValue() {
 }
 
 function bleep(marker) {
-  if (marker.page === global.state.selectedPage) {
+  let page = global.map.pages.find(p => p.floors.some(f => f.id === marker.floor)).id;
+
+  if (marker.floor === global.state.selectedFloor) {
+    bleepCurrentFloor(marker);
+  } else if (page === global.state.selectedPage) {
     bleepCurrentPage(marker);
   } else {
-    bleepAnotherPage(marker);
+    bleepAnotherPage(page);
   }
 }
 
-function bleepCurrentPage(marker) {
+function bleepCurrentFloor(marker) {
   let coords = {
     x: marker.coords.x * global.canvas.scale,
     y: marker.coords.y * global.canvas.scale
@@ -45,9 +49,15 @@ function bleepCurrentPage(marker) {
   bleepElement(bleep);
 }
 
-function bleepAnotherPage(marker) {
+function bleepAnotherPage(page) {
   let bleeps = document.getElementsByClassName('page-bleep');
-  let bleep = Array.from(bleeps).find(b => b.dataset.id === marker.page);
+  let bleep = Array.from(bleeps).find(b => b.dataset.page === page);
+  bleepElement(bleep);
+}
+
+function bleepCurrentPage(marker) {
+  let bleeps = document.getElementsByClassName('page-bleep');
+  let bleep = Array.from(bleeps).find(b => b.dataset.floor === marker.floor);
   bleepElement(bleep);
 }
 

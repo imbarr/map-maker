@@ -14,11 +14,14 @@ export class State {
   editingMarker: string
   selectedMarker: string
   selectedPage: string
+  selectedFloor: string
   selectedImage: HTMLImageElement
   selectedImageFile: File
   pageStates: PageState[]
   createIconSelected: Icon
   menuSelectedPage: string
+  menuSelectedFloor: string
+  menuCreatePage: boolean
 
   constructor() {
     this.filteredMarkers = []

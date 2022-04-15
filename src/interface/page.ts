@@ -1,5 +1,6 @@
 import { global } from '../global/global'
 import { Page } from '../global/map/page'
+import { populateFloorList } from './floor'
 
 export function populatePageList() {
   let list = document.getElementById('page-list')
@@ -14,7 +15,6 @@ export function setPageName(p: Page, name: string) {
     .find(c => (c as HTMLElement).dataset.page === p.id) as HTMLElement
   let span = child.getElementsByTagName('span')[0]
 
-  child.dataset.page = name
   span.innerText = name
 }
 
@@ -22,7 +22,7 @@ export function addPage(p: Page) {
   let list = document.getElementById('page-list')
   let elem = document.createElement('li')
   elem.setAttribute('data-page', p.id)
-  elem.innerHTML = `<span>${p.name}</span> <div class="page-bleep hide" data-id="${p.id}"></div>`
+  elem.innerHTML = `<span>${p.name}</span> <div class="page-bleep hide" data-page="${p.id}"></div>`
 
   if (global.state.selectedPage === p.id) {
     elem.classList.add('page-selected')
@@ -35,6 +35,9 @@ export function addPage(p: Page) {
     elem.classList.add('page-selected')
 
     let pageState = global.state.pageStates.find(s => s.id === p.id)
+    global.state.selectedFloor = pageState.selectedFloor
+    populateFloorList()
+
     global.canvas.loadMap()
     global.canvas.setState(pageState)
   })
@@ -43,6 +46,7 @@ export function addPage(p: Page) {
 
   global.state.pageStates.push({
     id: p.id,
+    selectedFloor: p.floors[0].id,
     scrollLeft: 0,
     scrollTop: 0,
     scale: 1
