@@ -19,5 +19,11 @@ export class FileMap {
 export class FilePage {
   id: string
   name: string
+  floors: FileFloor[]
+}
+
+export class FileFloor {
+  id: string
+  name: string
   image: string
 }

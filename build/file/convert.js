@@ -2,6 +2,8 @@ import { global } from '../global/global';
 import { version } from './version';
 import { IconsList } from '../global/constants/icons';
 import { Page } from '../global/map/page';
+import { Floor } from '../global/map/floor';
+import { Map } from '../global/map/map';
 export async function getFile() {
   let icons = global.state.icons.filter(i => i.custom);
   let fileIcons = [];
@@ -20,11 +22,22 @@ export async function getFile() {
 
   for (let i = 0; i < pages.length; i++) {
     let page = pages[i];
-    let base64 = await blobToDataURL(page.imageFile);
+    let floors = [];
+
+    for (let j = 0; j < page.floors.length; j++) {
+      let floor = page.floors[j];
+      let base64 = await blobToDataURL(floor.imageFile);
+      floors.push({
+        id: floor.id,
+        name: floor.name,
+        image: base64
+      });
+    }
+
     filePages.push({
       id: page.id,
       name: page.name,
-      image: base64
+      floors: floors
     });
   }
 
@@ -54,18 +67,22 @@ export async function setFile(data) {
     });
   }
 
-  global.map = {
-    markers: data.map.markers,
-    pages: []
-  };
+  global.map = new Map(data.map.markers, []);
 
   for (let i = 0; i < data.map.pages.length; i++) {
     let page = data.map.pages[i];
-    let file = dataURLtoFile(page.image);
-    let img = new Image();
-    img.src = URL.createObjectURL(file);
-    await img.decode();
-    let p = new Page(page.id, page.name, img, file);
+    let floors = [];
+
+    for (let j = 0; j < page.floors.length; j++) {
+      let floor = page.floors[j];
+      let file = dataURLtoFile(floor.image);
+      let img = new Image();
+      img.src = URL.createObjectURL(file);
+      await img.decode();
+      floors.push(new Floor(floor.id, floor.name, img, file));
+    }
+
+    let p = new Page(page.id, page.name, floors);
     global.map.pages.push(p);
     global.state.pageStates.push({
       id: p.id,

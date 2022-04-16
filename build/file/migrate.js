@@ -1,4 +1,6 @@
-import { version } from './version';
+import { version } from './version'; // @ts-ignore
+
+import { v4 as uuid } from 'uuid';
 
 class Migration {}
 
@@ -6,6 +8,10 @@ const migrations = [{
   from: '1.0',
   to: '1.1',
   migration: first
+}, {
+  from: '1.1',
+  to: '1.2',
+  migration: second
 }];
 export function migrate(f) {
   if (f.version === version) {
@@ -13,7 +19,7 @@ export function migrate(f) {
   }
 
   while (true) {
-    let migration = migrations.find(m => m.from);
+    let migration = migrations.find(m => m.from === f.version);
 
     if (!migration) {
       throw new Error('Cannot find migration');
@@ -33,6 +39,23 @@ function first(f) {
     let lines = m.text.split('\n');
     m.text = lines[0];
     m.desc = lines.slice(1).filter(l => l.length > 0).join('\n');
+    return m;
+  });
+}
+
+function second(f) {
+  f.map.pages = f.map.pages.map(p => {
+    p.floors = [{
+      id: uuid(),
+      name: 'Floor 1',
+      image: p.image
+    }];
+    delete p.image;
+    return p;
+  });
+  f.map.markers = f.map.markers.map(m => {
+    let page = f.map.pages.find(p => p.id === m.page);
+    m.floor = page.floors[0].id;
     return m;
   });
 }
