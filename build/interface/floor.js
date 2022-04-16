@@ -2,7 +2,7 @@ import { global } from '../global/global';
 export function populateFloorList() {
   let list = document.getElementById('floor-list');
   list.innerHTML = '';
-  global.map.pages.find(p => p.id === global.state.selectedPage).floors.forEach(addFloor);
+  global.map.floors.filter(f => f.page === global.state.selectedPage).forEach(addFloor);
 }
 export function setFloorName(f, name) {
   let list = document.getElementById('floor-list');

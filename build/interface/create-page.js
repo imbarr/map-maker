@@ -54,7 +54,7 @@ export function floorPrepareEdit() {
   let selectImage = document.getElementById('select-image');
   let selectImageTitle = document.getElementById('select-image-title');
   let text = document.getElementById('page-text-input');
-  let floor = global.map.getAllFloors().find(f => f.id === global.state.menuSelectedFloor);
+  let floor = global.map.floors.find(f => f.id === global.state.menuSelectedFloor);
   header.innerText = 'Edit floor';
   button.innerText = 'Save';
   selectImage.classList.remove('hide');

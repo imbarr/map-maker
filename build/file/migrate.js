@@ -44,18 +44,19 @@ function first(f) {
 }
 
 function second(f) {
-  f.map.pages = f.map.pages.map(p => {
-    p.floors = [{
+  f.map.floors = [];
+  f.map.pages.forEach(p => {
+    let floor = {
       id: uuid(),
+      page: p.id,
       name: 'Floor 1',
       image: p.image
-    }];
-    delete p.image;
-    return p;
+    };
+    f.map.floors.push(floor);
   });
   f.map.markers = f.map.markers.map(m => {
-    let page = f.map.pages.find(p => p.id === m.page);
-    m.floor = page.floors[0].id;
+    let floor = f.map.floors.find(p => p.page === m.page);
+    m.floor = floor.id;
     return m;
   });
 }

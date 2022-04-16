@@ -31,8 +31,7 @@ export class Canvas {
 
   loadMap() {
     let mapItem = new MapItem()
-    let page = global.map.pages.find(p => p.id === global.state.selectedPage)
-    let floor = page.floors.find(f => f.id === global.state.selectedFloor)
+    let floor = global.map.floors.find(f => f.id === global.state.selectedFloor)
     let markers = global.state.filteredMarkers.filter(m => m.floor === global.state.selectedFloor)
 
     markers.forEach(m => mapItem.addMarker(new MarkerItem(m)))

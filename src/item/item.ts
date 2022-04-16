@@ -1,4 +1,4 @@
-import { Canvas } from '../canvas/canvas'
+import { Canvas } from '../global/canvas'
 
 export interface Item {
   render(canvas: Canvas)

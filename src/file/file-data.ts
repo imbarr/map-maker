@@ -1,4 +1,5 @@
 import { Marker } from '../global/map/marker'
+import { Page } from '../global/map/page'
 
 export class FileData {
   version: string
@@ -13,17 +14,13 @@ export class FileIcon {
 
 export class FileMap {
   markers: Marker[]
-  pages: FilePage[]
-}
-
-export class FilePage {
-  id: string
-  name: string
+  pages: Page[]
   floors: FileFloor[]
 }
 
 export class FileFloor {
   id: string
+  page: string
   name: string
   image: string
 }

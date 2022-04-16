@@ -15,14 +15,13 @@ let map = new Map([
   new Marker('scull', '2', 'I am enemy', '',{ x: 200, y: 200}, ['enemy']),
   new Marker('scull', '3', 'I am enemy', '', { x: 300, y: 300}, [])
 ], [
-  new Page('1', 'Stardew valley', [
-    new Floor('1', 'Floor 1', img1, null),
-    new Floor('2', 'Floor 2', img2, null)
-  ]),
-  new Page('2', 'Valley of mines', [
-    new Floor('3', 'Floor 1', img1, null),
-    new Floor('4', 'Floor 2', img2, null),
-  ]),
+  new Page('1', 'Stardew valley'),
+  new Page('2', 'Valley of mines')
+], [
+  new Floor('1', '1', 'Floor 1', img1, null),
+  new Floor('2', '1', 'Floor 2', img2, null),
+  new Floor('3', '2', 'Floor 1', img1, null),
+  new Floor('4', '2', 'Floor 2', img2, null)
 ])
 
 global.setMap(map)

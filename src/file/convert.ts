@@ -1,6 +1,6 @@
 import { global } from '../global/global'
 import { version } from './version'
-import { FileIcon, FilePage, FileData, FileFloor } from './file-data'
+import { FileIcon, FileData, FileFloor } from './file-data'
 import { IconsList } from '../global/constants/icons'
 import { Page } from '../global/map/page'
 import { Floor } from '../global/map/floor'
@@ -15,17 +15,11 @@ export async function getFile(): Promise<FileData> {
     fileIcons.push({ id: icon.id, image: base64 })
   }
 
-  let filePages: FilePage[] = []
-  let pages = global.map.pages
-  for (let i = 0; i < pages.length; i++) {
-    let page = pages[i]
-    let floors: FileFloor[] = []
-    for (let j = 0; j < page.floors.length; j++) {
-      let floor = page.floors[j]
-      let base64 = await blobToDataURL(floor.imageFile)
-      floors.push({ id: floor.id, name: floor.name, image: base64})
-    }
-    filePages.push({ id: page.id, name: page.name, floors: floors})
+  let fileFloors: FileFloor[] = []
+  for (let j = 0; j < global.map.floors.length; j++) {
+    let floor = global.map.floors[j]
+    let base64 = await blobToDataURL(floor.imageFile)
+    fileFloors.push({ id: floor.id, page: floor.page, name: floor.name, image: base64})
   }
 
   return {
@@ -33,7 +27,8 @@ export async function getFile(): Promise<FileData> {
     icons: fileIcons,
     map: {
       markers: global.map.markers,
-      pages: filePages
+      pages: global.map.pages,
+      floors: fileFloors
     }
   }
 }
@@ -51,28 +46,24 @@ export async function setFile(data: FileData) {
     global.state.icons.push({ id: icon.id, image: img, imageFile: file, custom: true })
   }
 
-  global.map = new Map(data.map.markers, [])
+  global.map = new Map(data.map.markers, data.map.pages, [])
 
-  for (let i = 0; i < data.map.pages.length; i++) {
-    let page = data.map.pages[i]
-    let floors: Floor[] = []
-    for (let j = 0; j < page.floors.length; j++) {
-      let floor = page.floors[j]
-      let file = dataURLtoFile(floor.image)
-      let img = new Image()
-      img.src = URL.createObjectURL(file)
+  for (let j = 0; j < data.map.floors.length; j++) {
+    let floor = data.map.floors[j]
+    let file = dataURLtoFile(floor.image)
+    let img = new Image()
+    img.src = URL.createObjectURL(file)
 
-      await img.decode()
+    await img.decode()
 
-      floors.push(new Floor(floor.id, floor.name, img, file))
-    }
+    global.map.floors.push(new Floor(floor.id, floor.page, floor.name, img, file))
+  }
 
-
-    let p = new Page(page.id, page.name, floors)
-    global.map.pages.push(p)
+  for (let j = 0; j < data.map.pages.length; j++) {
+    let page = data.map.pages[j]
     global.state.pageStates.push({
-      id: p.id,
-      selectedFloor: p.floors[0].id,
+      id: page.id,
+      selectedFloor: global.map.floors.find(f => f.page === page.id).id,
       scrollLeft: 0,
       scrollTop: 0,
       scale: 1

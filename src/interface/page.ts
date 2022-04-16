@@ -46,7 +46,7 @@ export function addPage(p: Page) {
 
   global.state.pageStates.push({
     id: p.id,
-    selectedFloor: p.floors[0].id,
+    selectedFloor: global.map.floors.find(f => f.page === p.id).id,
     scrollLeft: 0,
     scrollTop: 0,
     scale: 1

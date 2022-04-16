@@ -17,7 +17,7 @@ export function onSetMap() {
   global.state.tags = []
   global.state.selectedTags = []
   global.state.selectedPage = global.map.pages[0].id
-  global.state.selectedFloor = global.map.pages[0].floors[0].id
+  global.state.selectedFloor = global.map.floors.find(f => f.page === global.state.selectedPage).id
   global.map.markers.forEach(m => global.state.addNewTags(m.tags))
   onMarkersEdited()
   populatePageList()

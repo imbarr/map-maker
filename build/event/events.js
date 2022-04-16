@@ -39,7 +39,8 @@ export function onSetImage() {
     let img = new Image();
 
     img.onload = () => {
-      global.setMap(new Map([], [new Page(uuid(), 'New page', [new Floor(uuid(), 'Floor 1', img, file)])]));
+      let pageId = uuid();
+      global.setMap(new Map([], [new Page(pageId, 'New page')], [new Floor(uuid(), pageId, 'Floor 1', img, file)]));
     };
 
     img.onerror = () => {
@@ -262,16 +263,20 @@ export function onPageCreate() {
     setPageName(page, name.value);
     page.name = name.value;
   } else if (global.state.menuSelectedFloor) {
-    let floor = global.map.getAllFloors().find(f => f.id === global.state.menuSelectedFloor);
+    let floor = global.map.floors.find(f => f.id === global.state.menuSelectedFloor);
     setFloorName(floor, name.value);
     floor.name = name.value;
+    floor.image = global.state.selectedImage;
+    floor.imageFile = global.state.selectedImageFile;
   } else if (global.state.menuCreatePage) {
-    let page = new Page(uuid(), name.value, [new Floor(uuid(), 'Floor 1', global.state.selectedImage, global.state.selectedImageFile)]);
+    let page = new Page(uuid(), name.value);
+    let floor = new Floor(uuid(), page.id, 'Floor 1', global.state.selectedImage, global.state.selectedImageFile);
     global.map.pages.push(page);
+    global.map.floors.push(floor);
     addPage(page);
   } else {
-    let floor = new Floor(uuid(), name.value, global.state.selectedImage, global.state.selectedImageFile);
-    global.map.pages.find(p => p.id === global.state.selectedPage).floors.push(floor);
+    let floor = new Floor(uuid(), global.state.selectedPage, name.value, global.state.selectedImage, global.state.selectedImageFile);
+    global.map.floors.push(floor);
     addFloor(floor);
   }
 

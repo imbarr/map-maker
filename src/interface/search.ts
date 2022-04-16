@@ -34,7 +34,8 @@ export function searchCurrentValue() {
 }
 
 function bleep(marker: Marker) {
-  let page = global.map.pages.find(p => p.floors.some(f => f.id === marker.floor)).id
+  let floor = global.map.floors.find(f => f.id === marker.floor)
+  let page = global.map.pages.find(p => p.id === floor.page).id
 
   if (marker.floor === global.state.selectedFloor) {
     bleepCurrentFloor(marker)
