@@ -273,4 +273,5 @@ html, body {
 .jump-img {
     position: absolute;
     z-index: 10;
+    transform: translate(-50%, -50%);
 }
