@@ -56,7 +56,7 @@ export async function setFile(data) {
     });
   }
 
-  global.map = new Map(data.map.markers, data.map.pages, []);
+  global.map = new Map(data.map.markers, data.map.pages, [], []);
 
   for (let j = 0; j < data.map.floors.length; j++) {
     let floor = data.map.floors[j];

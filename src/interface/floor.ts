@@ -18,6 +18,14 @@ export function setFloorName(f: Floor, name: string) {
   span.innerText = name
 }
 
+export function selectFloor(floor: string) {
+  let floorList = document.getElementById('floor-list')
+  let floors = Array.from(floorList.children).map(c => c as HTMLElement)
+  let selected = floors.find(c => c.dataset.floor === floor) as HTMLElement
+  floors.forEach(f => f.classList.remove('page-selected'))
+  selected.classList.add('page-selected')
+}
+
 export function addFloor(f: Floor) {
   let list = document.getElementById('floor-list')
   let elem = document.createElement('li')

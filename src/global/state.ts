@@ -19,9 +19,12 @@ export class State {
   selectedImageFile: File
   pageStates: PageState[]
   createIconSelected: Icon
+  createJumpIcon: Icon
+  createJumpFloor: string
   menuSelectedPage: string
   menuSelectedFloor: string
   menuCreatePage: boolean
+  selectedJump: string
 
   constructor() {
     this.filteredMarkers = []

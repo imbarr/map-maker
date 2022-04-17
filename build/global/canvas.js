@@ -2,6 +2,7 @@ import { setSize } from '../util';
 import { MapItem } from '../item/map-item';
 import { global } from './global';
 import { MarkerItem } from '../item/marker-item';
+import { JumpItem } from '../item/jump-item';
 const zoomStep = 1.1;
 const initSize = {
   width: 800,
@@ -19,7 +20,9 @@ export class Canvas {
     let mapItem = new MapItem();
     let floor = global.map.floors.find(f => f.id === global.state.selectedFloor);
     let markers = global.state.filteredMarkers.filter(m => m.floor === global.state.selectedFloor);
-    markers.forEach(m => mapItem.addMarker(new MarkerItem(m)));
+    let jumps = global.map.jumps.filter(m => m.floorFrom === global.state.selectedFloor);
+    markers.forEach(m => mapItem.addItem(new MarkerItem(m)));
+    jumps.forEach(j => mapItem.addItem(new JumpItem(j)));
     mapItem.setImage(floor.image.src);
     let size = {
       width: floor.image.naturalWidth,

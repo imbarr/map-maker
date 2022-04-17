@@ -22,6 +22,6 @@ let map = new Map([
   new Floor('2', '1', 'Floor 2', img2, null),
   new Floor('3', '2', 'Floor 1', img1, null),
   new Floor('4', '2', 'Floor 2', img2, null)
-])
+], [])
 
 global.setMap(map)

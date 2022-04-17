@@ -10,6 +10,13 @@ export function setFloorName(f, name) {
   let span = child.getElementsByTagName('span')[0];
   span.innerText = name;
 }
+export function selectFloor(floor) {
+  let floorList = document.getElementById('floor-list');
+  let floors = Array.from(floorList.children).map(c => c);
+  let selected = floors.find(c => c.dataset.floor === floor);
+  floors.forEach(f => f.classList.remove('page-selected'));
+  selected.classList.add('page-selected');
+}
 export function addFloor(f) {
   let list = document.getElementById('floor-list');
   let elem = document.createElement('li');

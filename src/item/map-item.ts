@@ -4,25 +4,25 @@ import { Canvas } from '../global/canvas'
 
 export class MapItem implements Item {
   image: string
-  markers: MarkerItem[]
+  items: Item[]
 
   constructor() {
-    this.markers = []
+    this.items = []
   }
 
   setImage(image: string) {
     this.image = image
   }
 
-  addMarker(marker: MarkerItem) {
-    this.markers.push(marker)
+  addItem(item: Item) {
+    this.items.push(item)
   }
 
   render(canvas: Canvas) {
     let elem = this.getElement()
     canvas.html.appendChild(elem)
 
-    this.markers.forEach(marker => marker.render(canvas))
+    this.items.forEach(marker => marker.render(canvas))
   }
 
   private getElement(): HTMLElement {

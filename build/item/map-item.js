@@ -1,20 +1,20 @@
 export class MapItem {
   constructor() {
-    this.markers = [];
+    this.items = [];
   }
 
   setImage(image) {
     this.image = image;
   }
 
-  addMarker(marker) {
-    this.markers.push(marker);
+  addItem(item) {
+    this.items.push(item);
   }
 
   render(canvas) {
     let elem = this.getElement();
     canvas.html.appendChild(elem);
-    this.markers.forEach(marker => marker.render(canvas));
+    this.items.forEach(marker => marker.render(canvas));
   }
 
   getElement() {

@@ -19,7 +19,9 @@ document.getElementById('menu-delete').addEventListener('click', event.onMenuDel
 document.getElementById('menu-page-create').addEventListener('click', event.onMenuPageCreate);
 document.getElementById('menu-page-edit').addEventListener('click', event.onMenuPageEdit);
 document.getElementById('menu-floor-create').addEventListener('click', event.onMenuFloorCreate);
-document.getElementById('menu-floor-edit').addEventListener('click', event.onMenuFloorEdit); // Create marker modal
+document.getElementById('menu-floor-edit').addEventListener('click', event.onMenuFloorEdit);
+document.getElementById('menu-jump-create').addEventListener('click', event.onMenuJumpCreate);
+document.getElementById('menu-jump-delete').addEventListener('click', event.onMenuJumpDelete); // Create marker modal
 
 document.getElementById('close-marker-modal').addEventListener('click', event.onCloseMarkerModal);
 document.getElementById('create-marker-modal').addEventListener('click', event.onCloseMarkerModal);
@@ -34,7 +36,14 @@ document.getElementById('create-page-modal').addEventListener('click', event.onC
 document.getElementById('create-page-modal-content').addEventListener('click', event.onPageModalClick);
 document.getElementById('select-image').addEventListener('click', event.onSelectImage);
 document.getElementById('page-text-input').addEventListener('input', event.onPageTextInputChange);
-document.getElementById('create-page').addEventListener('click', event.onPageCreate); // Search
+document.getElementById('create-page').addEventListener('click', event.onPageCreate); // Create jump modal
+
+document.getElementById('close-jump-modal').addEventListener('click', event.onCloseJumpModal);
+document.getElementById('create-jump-modal').addEventListener('click', event.onCloseJumpModal);
+document.getElementById('create-jump-modal-content').addEventListener('click', event.onJumpModalClick);
+document.getElementById('create-jump').addEventListener('click', event.onJumpCreate);
+document.getElementById('create-jump-select-icon').addEventListener('click', event.onJumpSelectIcon);
+document.getElementById('create-jump-select-floor').addEventListener('click', event.onJumpSelectFloor); // Search
 
 document.getElementById('search-field').addEventListener('input', event.onSearch);
 document.getElementById('tag-search-field').addEventListener('input', event.onTagSearch);

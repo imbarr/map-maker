@@ -12,6 +12,8 @@ export function openContextMenu(event) {
   let editPage = document.getElementById('menu-page-edit')
   let createFloor = document.getElementById('menu-floor-create')
   let editFloor = document.getElementById('menu-floor-edit')
+  let createJump = document.getElementById('menu-jump-create')
+  let deleteJump = document.getElementById('menu-jump-delete')
 
   createIcon.classList.add('hide')
   edit.classList.add('hide')
@@ -23,6 +25,8 @@ export function openContextMenu(event) {
   editPage.classList.add('hide')
   createFloor.classList.add('hide')
   editFloor.classList.add('hide')
+  createJump.classList.add('hide')
+  deleteJump.classList.add('hide')
 
   let target = event.target
   let open =
@@ -31,7 +35,8 @@ export function openContextMenu(event) {
     target.classList.contains('background-image') ||
     target.dataset.id ||
     target.parentElement.dataset.page ||
-    target.parentElement.dataset.floor
+    target.parentElement.dataset.floor ||
+    target.dataset.jump
 
   event.preventDefault()
 
@@ -46,6 +51,7 @@ export function openContextMenu(event) {
     global.canvas.setSelectedCoords(event.pageX, event.pageY)
 
     createIcon.classList.remove('hide')
+    createJump.classList.remove('hide')
     paste.classList.remove('hide')
     if (global.state.copyingMarker || global.state.cuttingMarker) {
       paste.classList.remove('hide')
@@ -62,6 +68,9 @@ export function openContextMenu(event) {
   } else if (target.parentElement.dataset.floor) {
     global.state.menuSelectedFloor = target.parentElement.dataset.floor
     editFloor.classList.remove('hide')
+  } else if (target.dataset.jump) {
+    global.state.selectedJump = target.dataset.jump
+    deleteJump.classList.remove('hide')
   }
 
   if (open) {

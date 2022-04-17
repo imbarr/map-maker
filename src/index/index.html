@@ -56,6 +56,9 @@
 
       <li class="dropdown-item hide" id="menu-floor-create">Create floor</li>
       <li class="dropdown-item hide" id="menu-floor-edit">Edit</li>
+
+      <li class="dropdown-item hide" id="menu-jump-create">Create jump</li>
+      <li class="dropdown-item hide" id="menu-jump-delete">Delete</li>
     </ul>
 
     <div id="create-marker-modal" class="modal fade">
@@ -109,6 +112,39 @@
           </div>
           <div class="modal-footer">
             <button type="button" id="create-page" class="btn btn-primary" disabled>Create</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="create-jump-modal" class="modal fade">
+      <div class="modal-dialog">
+        <div id="create-jump-modal-content" class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Create jump</h5>
+            <button type="button" id="close-jump-modal" class="btn-close"></button>
+          </div>
+          <div class="modal-body">
+            <span>Icon</span>
+            <div class="dropdown">
+              <button type="button" class="btn btn-primary dropdown-toggle" id="create-jump-select-icon">
+                Select Icon
+              </button>
+              <ul class="dropdown-menu" id="create-jump-select-icon-list">
+              </ul>
+            </div>
+
+            <span>Floor</span>
+            <div class="dropdown">
+              <button type="button" class="btn btn-primary dropdown-toggle" id="create-jump-select-floor">
+                Select Floor
+              </button>
+              <ul class="dropdown-menu" id="create-jump-select-floor-list">
+              </ul>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="create-jump" class="btn btn-primary" disabled>Create</button>
           </div>
         </div>
       </div>

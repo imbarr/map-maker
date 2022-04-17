@@ -15,6 +15,7 @@ import { getFile, setFile } from '../file/convert';
 import { migrate } from '../file/migrate';
 import { copyMarker } from '../global/map/marker';
 import { addFloor, setFloorName } from '../interface/floor';
+import { onCreateJump, prepareFloorCreate } from '../interface/create-jump';
 export function onFileMenu(event) {
   event.stopPropagation();
   let menu = document.getElementById('file-dropdown');
@@ -40,7 +41,7 @@ export function onSetImage() {
 
     img.onload = () => {
       let pageId = uuid();
-      global.setMap(new Map([], [new Page(pageId, 'New page')], [new Floor(uuid(), pageId, 'Floor 1', img, file)]));
+      global.setMap(new Map([], [new Page(pageId, 'New page')], [new Floor(uuid(), pageId, 'Floor 1', img, file)], []));
     };
 
     img.onerror = () => {
@@ -99,6 +100,11 @@ export function onMenuCreateIcon() {
   let modal = document.getElementById('create-marker-modal');
   modal.classList.add('show');
 }
+export function onMenuJumpCreate() {
+  prepareFloorCreate();
+  let modal = document.getElementById('create-jump-modal');
+  modal.classList.add('show');
+}
 export function onMenuEdit() {
   global.state.editingMarker = global.state.selectedMarker;
   prepareEdit();
@@ -132,6 +138,10 @@ export function onMenuDelete() {
   global.map.markers = global.map.markers.filter(m => m.id !== global.state.selectedMarker);
   onMarkersEdited();
 }
+export function onMenuJumpDelete() {
+  global.map.jumps = global.map.jumps.filter(m => m.id !== global.state.selectedJump);
+  global.canvas.loadMap();
+}
 export function onMenuPageCreate() {
   global.state.menuCreatePage = true;
   pagePrepareCreate();
@@ -162,11 +172,20 @@ export function onClosePageModal() {
   let modal = document.getElementById('create-page-modal');
   modal.classList.remove('show');
 }
+export function onCloseJumpModal() {
+  let modal = document.getElementById('create-jump-modal');
+  modal.classList.remove('show');
+}
 export function onMarkerModalClick(event) {
   document.getElementById('select-icon-list').classList.remove('show');
   event.stopPropagation();
 }
 export function onPageModalClick(event) {
+  event.stopPropagation();
+}
+export function onJumpModalClick(event) {
+  document.getElementById('create-jump-select-icon-list').classList.remove('show');
+  document.getElementById('create-jump-select-floor-list').classList.remove('show');
   event.stopPropagation();
 }
 export function onSelectImage() {
@@ -209,6 +228,26 @@ export function onSelectIcon(event) {
     list.classList.remove('show');
   } else {
     populateIconList(list);
+    list.classList.add('show');
+  }
+}
+export function onJumpSelectIcon(event) {
+  event.stopPropagation();
+  let list = document.getElementById('create-jump-select-icon-list');
+
+  if (list.classList.contains('show')) {
+    list.classList.remove('show');
+  } else {
+    list.classList.add('show');
+  }
+}
+export function onJumpSelectFloor(event) {
+  event.stopPropagation();
+  let list = document.getElementById('create-jump-select-floor-list');
+
+  if (list.classList.contains('show')) {
+    list.classList.remove('show');
+  } else {
     list.classList.add('show');
   }
 }
@@ -282,4 +321,10 @@ export function onPageCreate() {
 
   let modal = document.getElementById('create-page-modal');
   modal.classList.remove('show');
+}
+export function onJumpCreate() {
+  onCreateJump();
+  let modal = document.getElementById('create-jump-modal');
+  modal.classList.remove('show');
+  global.canvas.loadMap();
 }

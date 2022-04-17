@@ -263,3 +263,14 @@ html, body {
 #file-dropdown {
     width: 170px;
 }
+
+#create-jump-modal .modal-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 5px;
+}
+
+.jump-img {
+    position: absolute;
+    z-index: 10;
+}

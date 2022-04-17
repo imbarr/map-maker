@@ -16,5 +16,5 @@ let map = new Map([new Marker('person', '1', 'I am message', '', {
 }, ['enemy']), new Marker('scull', '3', 'I am enemy', '', {
   x: 300,
   y: 300
-}, [])], [new Page('1', 'Stardew valley'), new Page('2', 'Valley of mines')], [new Floor('1', '1', 'Floor 1', img1, null), new Floor('2', '1', 'Floor 2', img2, null), new Floor('3', '2', 'Floor 1', img1, null), new Floor('4', '2', 'Floor 2', img2, null)]);
+}, [])], [new Page('1', 'Stardew valley'), new Page('2', 'Valley of mines')], [new Floor('1', '1', 'Floor 1', img1, null), new Floor('2', '1', 'Floor 2', img2, null), new Floor('3', '2', 'Floor 1', img1, null), new Floor('4', '2', 'Floor 2', img2, null)], []);
 global.setMap(map);
