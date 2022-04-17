@@ -2,7 +2,6 @@ import { global } from '../global/global'
 import { version } from './version'
 import { FileIcon, FileData, FileFloor } from './file-data'
 import { IconsList } from '../global/constants/icons'
-import { Page } from '../global/map/page'
 import { Floor } from '../global/map/floor'
 import { Map } from '../global/map/map'
 
@@ -28,7 +27,8 @@ export async function getFile(): Promise<FileData> {
     map: {
       markers: global.map.markers,
       pages: global.map.pages,
-      floors: fileFloors
+      floors: fileFloors,
+      jumps: global.map.jumps
     }
   }
 }
@@ -46,7 +46,7 @@ export async function setFile(data: FileData) {
     global.state.icons.push({ id: icon.id, image: img, imageFile: file, custom: true })
   }
 
-  global.map = new Map(data.map.markers, data.map.pages, [], [])
+  global.map = new Map(data.map.markers, data.map.pages, [], data.map.jumps)
 
   for (let j = 0; j < data.map.floors.length; j++) {
     let floor = data.map.floors[j]
