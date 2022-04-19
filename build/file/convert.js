@@ -4,7 +4,7 @@ import { IconsList } from '../global/constants/icons';
 import { Floor } from '../global/map/floor';
 import { Map } from '../global/map/map';
 export async function getFile() {
-  let icons = global.state.icons.filter(i => i.custom);
+  let icons = global.state.icons.filter(i => i.custom).filter(i => global.map.markers.some(m => m.icon === i.id));
   let fileIcons = [];
 
   for (let i = 0; i < icons.length; i++) {
@@ -41,7 +41,7 @@ export async function getFile() {
   };
 }
 export async function setFile(data) {
-  global.state.icons = IconsList;
+  global.state.icons = [...IconsList];
 
   for (let i = 0; i < data.icons.length; i++) {
     let icon = data.icons[i];

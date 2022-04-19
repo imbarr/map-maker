@@ -7,6 +7,7 @@ import { Map } from '../global/map/map'
 
 export async function getFile(): Promise<FileData> {
   let icons = global.state.icons.filter(i => i.custom)
+    .filter(i => global.map.markers.some(m => m.icon === i.id))
   let fileIcons: FileIcon[] = []
   for (let i = 0; i < icons.length; i++) {
     let icon = icons[i]
@@ -34,7 +35,7 @@ export async function getFile(): Promise<FileData> {
 }
 
 export async function setFile(data: FileData) {
-  global.state.icons = IconsList
+  global.state.icons = [...IconsList]
 
   for (let i = 0; i < data.icons.length; i++) {
     let icon = data.icons[i]

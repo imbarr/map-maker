@@ -22,6 +22,6 @@ export class Marker {
   }
 }
 
-export function copyMarker(marker: Marker, coords: Coords): Marker {
-  return new Marker(marker.icon, marker.floor, marker.text, marker.desc, coords, marker.tags)
+export function copyMarker(marker: Marker, coords: Coords, floor: string): Marker {
+  return new Marker(marker.icon, floor, marker.text, marker.desc, coords, marker.tags)
 }

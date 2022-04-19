@@ -151,8 +151,9 @@ export function onMenuPaste() {
   if (global.state.cuttingMarker) {
     global.state.cuttingMarker = undefined
     marker.coords = coords
+    marker.floor = global.state.selectedFloor
   } else {
-    let newMarker = copyMarker(marker, coords)
+    let newMarker = copyMarker(marker, coords, global.state.selectedFloor)
     global.map.markers.push(newMarker)
   }
 

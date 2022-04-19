@@ -12,6 +12,10 @@ const migrations = [{
   from: '1.1',
   to: '1.2',
   migration: second
+}, {
+  from: '1.2',
+  to: '1.3',
+  migration: third
 }];
 export function migrate(f) {
   if (f.version === version) {
@@ -59,4 +63,8 @@ function second(f) {
     m.floor = floor.id;
     return m;
   });
+}
+
+function third(f) {
+  f.map.jumps = [];
 }

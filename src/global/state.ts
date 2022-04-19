@@ -30,7 +30,7 @@ export class State {
     this.filteredMarkers = []
     this.tags = []
     this.selectedTags = []
-    this.icons = IconsList
+    this.icons = [...IconsList]
     this.pageStates = []
   }
 

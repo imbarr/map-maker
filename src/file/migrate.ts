@@ -11,7 +11,8 @@ class Migration {
 
 const migrations: Migration[] = [
   { from: '1.0', to: '1.1', migration: first },
-  { from: '1.1', to: '1.2', migration: second }
+  { from: '1.1', to: '1.2', migration: second },
+  { from: '1.2', to: '1.3', migration: third }
 ]
 
 export function migrate(f: FileData) {
@@ -55,4 +56,8 @@ function second(f: any) {
     m.floor = floor.id
     return m
   })
+}
+
+function third(f: any) {
+  f.map.jumps = []
 }
